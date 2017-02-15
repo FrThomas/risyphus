@@ -1,11 +1,14 @@
 Package: risyphus
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
+Title: Tools/utility functions for repetitive and laborious tasks for studies with typically two groups.
+Version: 0.0.0.9000
+Authors@R: c(person("Fridtjof", "Thomas", email = "fthomas4@uthsc.edu", role = c("aut", "cre"))
 Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Description: Tools/utility functions for studies with typically two groups.
+    Clinical trials or observational studies require routine tasks that
+    can be automated to some extend. The package risyphus collects a few
+    such automations, e.g., compiling a so called baseline-table when two groups/study arms are considered.
+Depends: R (>= 3.3.2)
+License: GNU General Public License v3.0
 Encoding: UTF-8
 LazyData: true
