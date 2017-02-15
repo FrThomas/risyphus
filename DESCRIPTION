@@ -12,3 +12,5 @@ Depends: R (>= 3.3.2)
 License: GNU General Public License v3.0
 Encoding: UTF-8
 LazyData: true
+URL: http://github.com/FrThomas/risyphus
+BugReports: http://github.com/FrThomas/risyphus/issues
