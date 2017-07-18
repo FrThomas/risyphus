@@ -1,20 +1,19 @@
-############################################################################
+################################################################################
 ###
-###    Project: Tools/utilities for studies with 2 groups
+###    Project: R package risyphus
 ###
 ### PI/Contact: Fridtjof Thomas
 ###
 ###    Purpose: Function to compile BL-table
 ###
-###
 ###       Code: Fridtjof Thomas, 06/27/2016
 ###               Last modified: Under GIT version control.
 ###
-############################################################################
+################################################################################
 ###    History: >Short description of major changes to code, if applicable<
 ###
 ###
-############################################################################
+################################################################################
 #
 # You can learn more about package authoring with RStudio at:
 #

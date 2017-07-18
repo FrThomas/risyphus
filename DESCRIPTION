@@ -2,7 +2,7 @@ Package: risyphus
 Type: Package
 Title: Tools/utility functions for repetitive and laborious tasks for studies with typically two groups.
 Version: 0.0.0.9000
-Authors@R: c(person("Fridtjof", "Thomas", email = "fthomas4@uthsc.edu", role = c("aut", "cre"))
+Authors@R: c(person("Fridtjof", "Thomas", email = "fthomas4@uthsc.edu", role = c("aut", "cre")))
 Maintainer: The package maintainer <yourself@somewhere.net>
 Description: Tools/utility functions for studies with typically two groups.
     Clinical trials or observational studies require routine tasks that
@@ -14,3 +14,4 @@ Encoding: UTF-8
 LazyData: true
 URL: http://github.com/FrThomas/risyphus
 BugReports: http://github.com/FrThomas/risyphus/issues
+RoxygenNote: 6.0.1
