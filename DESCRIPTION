@@ -8,7 +8,7 @@ Description: Tools/utility functions for studies with typically two groups.
     Clinical trials or observational studies require routine tasks that
     can be automated to some extend. The package risyphus collects a few
     such automations, e.g., compiling a so called baseline-table when two groups/study arms are considered.
-Depends: R (>= 3.3.2)
+Depends: R (>= 3.4.1)
 License: GNU General Public License v3.0
 Encoding: UTF-8
 LazyData: true
