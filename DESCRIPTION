@@ -1,17 +1,20 @@
 Package: risyphus
 Type: Package
-Title: Tools/utility functions for repetitive and laborious tasks for studies with typically two groups.
+Title: Tools for Repetitive and Laborious Tasks for Studies with Typically Two Groups.
 Version: 0.0.0.9000
 Authors@R: c(person("Fridtjof", "Thomas", email = "fthomas4@uthsc.edu", role = c("aut", "cre")))
-Maintainer: The package maintainer <yourself@somewhere.net>
 Description: Tools/utility functions for studies with typically two groups.
     Clinical trials or observational studies require routine tasks that
-    can be automated to some extend. The package risyphus collects a few
+    can be automated to some extend and risyphus collects a few
     such automations, e.g., compiling a so called baseline-table when two groups/study arms are considered.
 Depends: R (>= 3.4.1)
 License: GNU General Public License v3.0
 Encoding: UTF-8
 LazyData: true
-URL: http://github.com/FrThomas/risyphus
-BugReports: http://github.com/FrThomas/risyphus/issues
+URL: https://github.com/FrThomas/risyphus
+BugReports: https://github.com/FrThomas/risyphus/issues
 RoxygenNote: 6.0.1
+Suggests: testthat,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
