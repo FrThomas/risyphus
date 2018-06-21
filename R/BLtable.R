@@ -123,7 +123,7 @@ grouptest <- function(data, group.var){
 
 
 
-#' Function to gather information about the table before computing begins
+#' Function to gather information about the BL-table before computing begins
 #'
 #' \code{BLtable.layout} is called by \code{\link{BLtable}} to gather information about the table before computing begins
 #'
