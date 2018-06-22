@@ -12,6 +12,9 @@ Current Goals
 Recent additions and changes
 -----
 * ORtable: Function to compile table of odds ratios based on logistic regression.
+* HRtable: Function to compile table of hazard ratios based on Cox proportional 
+hazards model.
+
 
 
 TO DO
@@ -19,6 +22,6 @@ TO DO
 * BLtable: Make BLtable work with tibbles.
 * BLtable: Refine handling of p-values (including no p-values)
 * BLtable: Option for only one group.
-* BLtable: Option to add information about missing data for each variable.
-* Add table for hazard ratios based on Cox regression.
+* BLtable, ORtable, HRtable: Option to add information about missing data for each variable.
 * Add variables to example data set to demonstrate ORtable and HRtable
+(currently example code does not work due to lack of these variables)
