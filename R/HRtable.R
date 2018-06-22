@@ -134,7 +134,7 @@ HRtable.text <- function(this.data, this.outcome, this.var,
     if (length(this.pvalue.coeff) == 1){
       this.pvalue <- this.pvalue.coeff
     } else{
-      this.pvalue <- survival::anova.coxph(cox_One)[this.var, "Pr(>|Chi|)"]
+      this.pvalue <- anova(cox_One)[this.var, "Pr(>|Chi|)"]
     }
 
 
