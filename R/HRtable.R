@@ -96,7 +96,7 @@ HRtable.text <- function(this.data, this.outcome, this.var,
   #       "Surv(Follow_up_Years, Event_Death)"
   if (this.type == "Continuous") { # Cox regression, one line output.
 
-    cox_One <- coxph(
+    cox_One <- survival::coxph(
       as.formula(paste(this.outcome, " ~ ", this.var, sep = "")),
       data = this.data)
 
@@ -119,7 +119,7 @@ HRtable.text <- function(this.data, this.outcome, this.var,
     )
   } else if ( (this.type %in% c("Dichotomous", "Factor") ) ) {
 
-    cox_One <- coxph(
+    cox_One <- survival::coxph(
       as.formula(paste(this.outcome, " ~ ", this.var, sep = "")),
       data = this.data)
 
@@ -134,7 +134,7 @@ HRtable.text <- function(this.data, this.outcome, this.var,
     if (length(this.pvalue.coeff) == 1){
       this.pvalue <- this.pvalue.coeff
     } else{
-      this.pvalue <- anova(cox_One)[this.var, "Pr(>|Chi|)"]
+      this.pvalue <- survival::anova.coxph(cox_One)[this.var, "Pr(>|Chi|)"]
     }
 
 
