@@ -2,7 +2,7 @@
 % Please edit documentation in R/BLtable.R
 \name{generateinputtable}
 \alias{generateinputtable}
-\title{Function to create .}
+\title{Function to create a skeleton version of input table.}
 \usage{
 generateinputtable(inputset)
 }

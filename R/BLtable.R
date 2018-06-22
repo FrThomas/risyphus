@@ -351,7 +351,7 @@ BLtable <- function(data, info, group.var, sign.digits=2, sign.digits.prop=1, pv
 ### Basic idea of such a function "generateinputtable()" and first code ###
 ### version contributed by Tristan Hayes 7/26/16 ("create input csv.R") ###
 ###########################################################################
-#' Function to create .
+#' Function to create a skeleton version of input table.
 #'
 #'\code{generateinputtable} takes an R data frame and creates table-input useful for \code{\link{BLtable}}.
 #'
