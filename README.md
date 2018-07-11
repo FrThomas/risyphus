@@ -11,6 +11,7 @@ Current Goals
 
 Recent additions and changes
 -----
+* ONEtable: Function to compile table for one group.
 * ORtable: Function to compile table of odds ratios based on logistic regression.
 * HRtable: Function to compile table of hazard ratios based on Cox proportional 
 hazards model.

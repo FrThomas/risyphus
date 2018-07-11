@@ -1,6 +1,6 @@
 Package: risyphus
 Type: Package
-Version: 0.0.0.9100
+Version: 0.0.0.9110
 Title: Tools for Repetitive and Laborious Tasks for Studies with Typically Two Groups.
 Authors@R: c(person("Fridtjof", "Thomas", email = "fthomas4@uthsc.edu", role = c("aut", "cre")))
 Description: Tools/utility functions for studies with typically two groups.
