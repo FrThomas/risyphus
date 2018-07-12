@@ -50,9 +50,9 @@
 #'    comprehensive.  Setting \code{test.input = FALSE} will bypass logical tests.
 #' @return An R character-matrix containing the compiled contingency table information.
 #' @examples
-#' ContTable(example_data, row.var = "Educ", col.var = "Gender", show.props = "row", sign.digits.prop=1)
+#' CONtable(example_data, row.var = "Educ", col.var = "Gender", show.props = "row", sign.digits.prop=1)
 #' @export
-ContTable <- function(data, row.var, col.var, show.props = "cell", sign.digits.prop=1, test.input = TRUE){
+CONtable <- function(data, row.var, col.var, show.props = "cell", sign.digits.prop=1, test.input = TRUE){
   # Test input:
   if (test.input) {  }
   ### ADD TEST FOR FACTORS for all factors!
