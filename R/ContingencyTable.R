@@ -4,7 +4,7 @@
 ###
 ### PI/Contact: Fridtjof Thomas
 ###
-###    Purpose: Function to compile a continguency table with margins and
+###    Purpose: Function to compile a contingency table with margins and
 ###             proportions
 ###
 ###       Code: Fridtjof Thomas, 07/11/2018
