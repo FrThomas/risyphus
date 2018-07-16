@@ -1,12 +1,10 @@
 Package: risyphus
 Type: Package
-Version: 0.0.0.9110
+Version: 0.0.0.9120
 Title: Tools for Repetitive and Laborious Tasks for Studies with Typically Two Groups.
 Authors@R: c(person("Fridtjof", "Thomas", email = "fthomas4@uthsc.edu", role = c("aut", "cre")))
-Description: Tools/utility functions for studies with typically two groups.
-    Clinical trials or observational studies require routine tasks that
-    can be automated to some extend and risyphus collects a few
-    such automations, e.g., compiling a so called baseline-table when two groups/study arms are considered.
+Description: Tools/utility functions to facilitate recurrent tasks with focus on 
+    logistic regression, Cox regression, and studies/clinical trials with two groups.
 Depends: R (>= 3.4.1)
 Imports: MASS,
     survival

@@ -1,5 +1,6 @@
 # risyphus
-Tools/utility functions for repetitive and laborious tasks for studies with typically two groups.
+Tools/utility functions to facilitate recurrent tasks with focus on
+logistic regression, Cox regression, and studies/clinical trials with two groups.
 
 
 Current Goals
