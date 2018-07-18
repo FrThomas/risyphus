@@ -3,6 +3,22 @@ Tools/utility functions to facilitate recurrent tasks with focus on
 logistic regression, Cox regression, and studies/clinical trials with two groups.
 
 
+This package contains functions that facilitate laborious steps
+in most data analysis tasks, such as basic variable description,
+compilation of baseline tables comparing two groups, odds-ratio tables
+based on logistic regression, or hazard-ratio tables based on
+Cox proportional hazards models. The name of this package is derived
+from the Greek mythological figure Sisyphus (Sisyphus for R = risyphus),
+who was doomed to roll a big boulder up a hill just to see it roll down
+again ad infinitum. Somehow I related to the laborious task of keeping all
+standard tables up to date in a developing project as Sisyphean, and it all
+too often consumed too much time and energy devoted to a project. My
+intention with this package is to do standard tasks well and to free time
+and resources for better statistical analyses and to facilitate
+reproducible computing.
+
+
+
 Current Goals
 -----
 * Add flexibility to current functions.
