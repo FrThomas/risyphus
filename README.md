@@ -53,7 +53,6 @@ TO DO
 
 History
 -----
-* 2018-04-06: risyphus made publicly available on [GitHub](https://github.com/FrThomas/risyphus)
-([GPL-3.0 license] (https://github.com/FrThomas/risyphus/blob/master/LICENSE)).
+* 2018-04-06: risyphus made publicly available on [GitHub](https://github.com/FrThomas/risyphus).
 * 2017-02-12: Work on risyphus begins in a private GitHub repository.
 
