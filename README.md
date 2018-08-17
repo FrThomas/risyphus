@@ -49,3 +49,11 @@ TO DO
 * BLtable, ORtable, HRtable: Option to add information about missing data for each variable.
 * Add variables to example data set to demonstrate ORtable and HRtable
 (currently example code does not work due to lack of these variables)
+
+
+History
+-----
+* 2018-04-06: risyphus made publicly available on [GitHub](https://github.com/FrThomas/risyphus)
+([GPL-3.0 license] (https://github.com/FrThomas/risyphus/blob/master/LICENSE)).
+* 2017-02-12: Work on risyphus begins in a private GitHub repository.
+
