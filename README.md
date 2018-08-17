@@ -2,7 +2,6 @@
 Tools/utility functions to facilitate recurrent tasks with focus on
 logistic regression, Cox regression, and studies/clinical trials with two groups.
 
-
 This package contains functions that facilitate laborious steps
 in most data analysis tasks, such as basic variable description,
 compilation of baseline tables comparing two groups, odds-ratio tables
@@ -18,6 +17,14 @@ and resources for better statistical analyses and to facilitate
 reproducible computing.
 
 
+Download/Installation
+----
+This version of [risyphus on GitHub](https://github.com/FrThomas/risyphus)
+can be installed from R after installing the `devtools` package.
+```r
+install.packages("devtools") # Will install from CRAN.
+devtools::install_github(repo="FrThomas/risyphus") # Will install from GitHub.
+```
 
 Current Goals
 -----
@@ -33,7 +40,6 @@ Recent additions and changes
 * ORtable: Function to compile table of odds ratios based on logistic regression.
 * HRtable: Function to compile table of hazard ratios based on Cox proportional 
 hazards model.
-
 
 
 TO DO
