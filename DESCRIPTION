@@ -17,7 +17,7 @@ Description: This package contains functions that facilitate laborious steps
     intention with this package is to do standard tasks well and to free time
     and resources for better statistical analyses and to facilitate
     reproducible computing.
-Depends: R (>= 3.4.1)
+Depends: R (>= 3.4.0)
 Imports: MASS,
     survival
 Suggests: testthat,
