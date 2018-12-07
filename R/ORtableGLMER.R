@@ -32,6 +32,57 @@
 
 
 
+#' Synthetic data for compiling a OR table
+#'
+#' A dataset containing typical entries for ORtable with IDs indicating grouping.
+#'
+#' @format A data frame with 100 rows and 5 variables:
+#' \describe{
+#'  \item{ID}{Fictitious ID}
+#'  \item{gender}{Fictitious gender as example of a binary variable (as text)}
+#'  \item{trait}{Fictitious factor with three levels}
+#'  \item{cov}{Fictitious continuous covariate}
+#'  \item{outc}{Fictitious binary outcome (0/1)}
+#' }
+#' @source Synthetic data created by the package author
+"example_data2"
+
+set.seed(745)
+mydemo <- data.frame(ID = 1:20, gender = rep.int(1:2, times = 10), trait = rep(c("A","B","C"), length.out = 20),
+                     stringsAsFactors = FALSE)
+mydemo$gender <- factor(mydemo$gender, levels = 1:2, labels = c("Male", "Female"))
+mydemo$trait <- factor(mydemo$trait)
+mydata <- data.frame(ID = rep.int(1:20, times = 5), cov = NA, outc = NA)
+mydata$cov <- rnorm(dim(mydata)[[1]])
+mydata$outc <- rbinom(n = dim(mydata)[[1]], size = 1, prob = 0.30)
+example_data2 <- merge(mydemo, mydata, by = "ID", all = TRUE)
+rm(mydemo, mydata)
+
+#' Description for compilation of table (participant data set)
+#'
+#' A dataset containing the variables and tests to be included in the baseline table
+#'
+#' @format A data frame with 3 rows and 5 columns:
+#' \describe{
+#'  \item{Variable}{Variable name}
+#'  \item{ORtable}{Indicator whether to include in BL table}
+#'  \item{Table.label}{Label to use in the created table}
+#'  \item{Type}{What type of variable this is: Continuous, Dichotomous, or Factor?}
+#'  \item{Test}{Test to be used for p-value: t-test, Wilcoxon, Chi-square, or Fisher?)}
+#' }
+#' @source Synthetic data created by the package author
+"example_variables2"
+example_variables2 <- data.frame(
+  Variable = c("cov", "gender", "trait"),
+  ORtable = 1,
+  Table.label = c("Some covariate", "Factor with two levels", "Factor with more than two levels"),
+  Type = c("Continuous", "Factor", "Factor"),
+  stringsAsFactors = FALSE)
+
+# Put these data sets into the right place in the right format:
+devtools::use_data(example_data2, example_variables2, overwrite = TRUE)
+
+
 # Function determining the number of needed rows for the OR table
 # From risyphus::BLtable.layout
 #' Function to gather information about the OR-table before computing begins
@@ -213,7 +264,7 @@ ORtableGLMER.text <- function(this.data, this.outcome, this.ID, this.var,
 
 
 ### From risyphus::BLtable
-#' Function to compile OR-table based on GLMER.
+#' Function to compile OR-table based on GLMER with provided IDs for grouping.
 #'
 #' @param data A data frame that contains the data (one row per participant).
 #' @param this.outcome The name of the variable (column) in \code{data} that is
@@ -223,7 +274,7 @@ ORtableGLMER.text <- function(this.data, this.outcome, this.ID, this.var,
 #'    non-independence of observations from participants with repeated outcomes.
 #'    This variable is used in the called lme::glmer function as part of the
 #'    formula to specify a random effect.
-#' @param info A data frame with specifications for the BL-table. (See Examples below.)
+#' @param info A data frame with specifications for the OR-table. (See Examples below.)
 #' @param sign.digits Digits used for parameter estimate
 #' @param sign.digits.OR Digits used for odds ratio with conf.intervals
 #' @param pvalue.digits Digits used for p-values.
@@ -245,7 +296,11 @@ ORtableGLMER.text <- function(this.data, this.outcome, this.ID, this.var,
 #'    \code{linebreak.tag = "<br>"} (HTML tag to insert a single line break) is useful.
 #' @return An R character-matrix containing the compiled table information.
 #' @examples
-#' ORtable(data = example_data, info = example_variables, this.outcome = "Return_within_90_days", test.input = TRUE)
+#'    ORtableGLMER(data=example_data2, this.outcome="outc", this.ID="ID",
+#'      info=example_variables2,
+#'      sign.digits=2, sign.digits.OR=3, pvalue.digits=3, pvalue.cutoff=0.001,
+#'      test.input = FALSE, factor.level.bullet = "- ",
+#'      less.than.character = "< ", linebreak.tag = "")
 #' @export
 ORtableGLMER <- function(data, this.outcome, this.ID, info, sign.digits=2, sign.digits.OR=3, pvalue.digits=3, pvalue.cutoff=0.001,
                     test.input = FALSE,
@@ -325,14 +380,14 @@ ORtableGLMER <- function(data, this.outcome, this.ID, info, sign.digits=2, sign.
 }
 
 # Test function - needs data sets etc. created above when testing ORtableGLMER.text().
-myinfo <- data.frame(Variable = c("cov", "gender", "trait"),
-                     Table.label = c("Some covariate", "Factor with two levels", "Factor with more than two levels"),
-                     Type = c("Continuous", "Factor", "Factor"),
-                     stringsAsFactors = FALSE)
-
-ORtableGLMER(data=mydata, this.outcome="outc", this.ID="ID", info=myinfo, sign.digits=2, sign.digits.OR=3, pvalue.digits=3, pvalue.cutoff=0.001,
-                         test.input = FALSE,
-                         factor.level.bullet = "- ", less.than.character = "< ", linebreak.tag = "")
+# myinfo <- data.frame(Variable = c("cov", "gender", "trait"),
+#                      Table.label = c("Some covariate", "Factor with two levels", "Factor with more than two levels"),
+#                      Type = c("Continuous", "Factor", "Factor"),
+#                      stringsAsFactors = FALSE)
+#
+# ORtableGLMER(data=mydata, this.outcome="outc", this.ID="ID", info=myinfo, sign.digits=2, sign.digits.OR=3, pvalue.digits=3, pvalue.cutoff=0.001,
+#                          test.input = FALSE,
+#                          factor.level.bullet = "- ", less.than.character = "< ", linebreak.tag = "")
 
 
 #######################
