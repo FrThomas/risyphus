@@ -145,6 +145,10 @@ ORtableGLMER.layout <- function(data, info){
 ORtableGLMER.text <- function(this.data, this.outcome, this.ID, this.var,
                          this.type, sign.digits, sign.digits.OR, pvalue.digits, pvalue.cutoff, less.than.character){
 
+  # Drop rows with missing information in this.var - avoid problem with
+  # p-value below when using drop1().
+  this.data <- this.data[!is.na(this.data[,this.var]), ]
+
   if (this.type == "Continuous") { # Logistic/GLMER regression, one line output.
 
     glmer_One <- lme4::glmer(
