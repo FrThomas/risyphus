@@ -1,6 +1,6 @@
 Package: risyphus
 Type: Package
-Version: 0.0.0.9120
+Version: 0.0.0.9130
 Title: Tools/utility functions to facilitate recurrent tasks with focus on
     observational studies and clinical trials with two groups.
 Authors@R: c(person("Fridtjof", "Thomas", email = "fthomas4@uthsc.edu", role = c("aut", "cre")))

@@ -35,6 +35,8 @@ Current Goals
 
 Recent additions and changes
 -----
+* ORtableGLMER: Function to compile table of odds ratios based on
+generalized logistic regression with a provided ID for clustering.
 * ContTable: Function to compile contingency tables.
 * ONEtable: Function to compile table for one group (with or without information about missing entries).
 * ORtable: Function to compile table of odds ratios based on logistic regression.
