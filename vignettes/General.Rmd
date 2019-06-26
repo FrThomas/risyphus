@@ -4,7 +4,7 @@ author: "Fridtjof Thomas"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{What risyphus can do for you}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -15,9 +15,32 @@ Vignettes are long form documentation commonly included in packages. Because the
 - Has a smaller default figure size
 - Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
 
+
 ## Vignette Info
 
 Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
+
+---
+
+Tools/utility functions to facilitate recurrent tasks with focus on
+logistic regression, Cox regression, and studies/clinical trials with two groups.
+
+This package contains functions that facilitate laborious steps
+in most data analysis tasks, such as basic variable description,
+compilation of baseline tables comparing two groups, odds-ratio tables
+based on logistic regression, or hazard-ratio tables based on
+Cox proportional hazards models. The name of this package is derived
+from the Greek mythological figure Sisyphus (Sisyphus for R = risyphus),
+who was doomed to roll a big boulder up a hill just to see it roll down
+again ad infinitum. Somehow I related to the laborious task of keeping all
+standard tables up to date in a developing project as Sisyphean, and it all
+too often consumed too much time and energy devoted to a project. My
+intention with this package is to do standard tasks well and to free time
+and resources for better statistical analyses and to facilitate
+reproducible computing.
+
+---
+
 
 ## Styles
 
