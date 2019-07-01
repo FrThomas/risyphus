@@ -4,9 +4,9 @@
 \alias{table.text}
 \title{Function to compute and render text entries for BL-table}
 \usage{
-table.text(this.data, this.var, group.var, this.GroupA, this.GroupB, this.type,
-  this.test, sign.digits, sign.digits.prop, pvalue.digits, pvalue.cutoff,
-  less.than.character)
+table.text(this.data, this.var, group.var, this.GroupA, this.GroupB,
+  this.type, this.test, sign.digits, sign.digits.prop, pvalue.digits,
+  pvalue.cutoff, less.than.character)
 }
 \arguments{
 \item{this.data}{Data used for the computations}

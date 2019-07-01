@@ -4,7 +4,8 @@
 \alias{CheckNames}
 \title{Function to test the identity of variable names in two data sets.}
 \usage{
-CheckNames(data1, data2, identical.order = TRUE, names.data1.only = FALSE)
+CheckNames(data1, data2, identical.order = TRUE,
+  names.data1.only = FALSE)
 }
 \arguments{
 \item{data1}{A data frame.}

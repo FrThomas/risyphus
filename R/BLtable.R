@@ -95,7 +95,7 @@ example_variables <- data.frame(
   )
 
 # Put these data sets into the right place in the right format:
-devtools::use_data(example_data, example_variables, overwrite = TRUE)
+usethis::use_data(example_data, example_variables, overwrite = TRUE)
 
 
 

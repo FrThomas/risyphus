@@ -80,7 +80,7 @@ example_variables2 <- data.frame(
   stringsAsFactors = FALSE)
 
 # Put these data sets into the right place in the right format:
-devtools::use_data(example_data2, example_variables2, overwrite = TRUE)
+usethis::use_data(example_data2, example_variables2, overwrite = TRUE)
 
 
 # Function determining the number of needed rows for the OR table

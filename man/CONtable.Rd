@@ -4,8 +4,8 @@
 \alias{CONtable}
 \title{Function to compile a contingency table.}
 \usage{
-CONtable(data, row.var, col.var, show.props = "cell", sign.digits.prop = 1,
-  test.input = TRUE)
+CONtable(data, row.var, col.var, show.props = "cell",
+  sign.digits.prop = 1, test.input = TRUE)
 }
 \arguments{
 \item{data}{A data frame that contains the data.}
