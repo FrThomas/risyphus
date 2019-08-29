@@ -1,26 +1,127 @@
 ---
-title: "What risyphus can do for you"
+title: "Introduction to risyphus"
 author: "Fridtjof Thomas"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{What risyphus can do for you}
+  %\VignetteIndexEntry{Introduction to risyphus}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
 
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
-
-
-## Vignette Info
-
-Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
 
 ---
+
+## What risyphus can do for you
+
+Statistical analyses come in many flavors, but they typically require the following 
+steps:
+
+* Read some data.
+* Process that data: "make it ready for your analysis".
+* Describe the data you *exclude* from the analysis.
+* Describe the data you *include* for the analysis.
+* Describe the data for specific subgroups of interest.
+* Produce some standard analysis results.
+* Produce the envisioned "full analysis".
+
+The risyphus package makes describing your data and the standard analyses fast
+and reproducible:
+
+* By generating descriptive tables in standard form ("baseline tables").
+* By allowing you to keep track of which variabels you have included in
+potentially very many tables.
+* By collecting output from many similar models into a single table.
+* By playing nicely with R Markdown and Knitr in order to generate
+material you can easily share with non-statisticians.
+
+The benefit from using risyphus are fourfold:
+
+1. Spend your time and resources where it is needed the most: You can quickly
+transition from reading the data to the intellectually satifying part of the "full analysis"!
+1. Make progress that can be shared with co-investigators throughout the process.
+1. Quickly respond to updated data sets and additional requests: Just re-run the R-Markdown script to
+update all tables and basic analyses or add additional subgroups by minor changes in your code!
+1. Respond to reviewer questions easily: The structured approach to table generation
+makes it easy to track exactly which variables are used in which table.
+
+
+## What's the problem with standard tables?
+
+### Why statistical tables are not just a collection of numbers of the same sort
+
+A table in statistical programs is typically a rectangular arrangement of 
+(computed) numbers with additional text information on the top row and left-most
+column.
+
+A table in a statistical journal contains non-trivial changes to this basic idea.
+Most notably in these respects:
+
+* Not all numbers are treated the same: sometimes rounding is required, sometimes
+replacements. Example: A p-value of 0.14533874 might be required to be displayed as
+0.145, but 0.00000347 is to become <.001 and not 0.000.
+
+* A table cell contains more than one computed number. Example: An entry might read
+34.7 (2.34) and is to be interpreted as mean 34.7 and standard deviation 2.34.
+
+* Numbers that look the same have different meanings depending on context. Example:
+"34.7 (2.34) " and "45 (19)" might refer to a continuous and discrete variable,
+respectively, and thus refer to "mean (std. dev.)" and "count (%)", respectively.
+
+
+### How does risyphus approach this problem?
+
+Functions in risyphus that return "tables" all do the following behind the scenes
+and (for most part) hidden from the user:
+
+1. They determine how the final table has to look like.
+
+1. They compute whatever is required.
+
+1. They stich the requested output together.
+
+1. They return the table in form of a rectangular array of mode **character**.
+
+
+The last aspect is crucial in understanding how risyphus returns statistical tables.
+The reasons why every cell must contain character values are these:
+
+1. To change values from 0.000 to <.001 requires the introduction of characters:
+"<.001" is *not* a number as far as the computer is concerned.
+
+1. Character values allow for the most reliable rendering of numbers in
+prespecified formats: If "34.7 (2.34)" is the template for presentation, then
+"45.2 (3.00)" is required and not a sudden change to "45.2 (3)".
+
+The above differences between simple collection of numbers and statistical tables
+fuel these bad habits:
+
+* Excessive output that includes the needed numbers "somewhere". (Statistician does
+not have the bandwidth to collect and arrange the relevant numbers for the investigator.)
+
+* Statisticians and data analysts spend a hugh amount of time on 
+cutting and pasting numbers as well as rounding numbers "manually" - all operations
+that are prone to introducing errors. (Statistician devotes a lot of time to keeping
+simple tables neat and up-to-date.)
+
+* Artifically enforced "deadlines" after which no further corrections to the
+data are accepted. (Known corrections are ignored in order to proceed to some
+meaningful analysis.)
+
+The functions in risyphus allow anyone to break these bad habits.
+
+
+
+## The BLtable function
+
+
+
+
+
+
+
+Vignette Info
 
 Tools/utility functions to facilitate recurrent tasks with focus on
 logistic regression, Cox regression, and studies/clinical trials with two groups.
