@@ -19,37 +19,49 @@ Statistical analyses come in many flavors, but they typically require the follow
 steps:
 
 * Read some data.
+
 * Process that data: "make it ready for your analysis".
+
 * Describe the data you *exclude* from the analysis.
+
 * Describe the data you *include* for the analysis.
+
 * Describe the data for specific subgroups of interest.
+
 * Produce some standard analysis results.
+
 * Produce the envisioned "full analysis".
+
 
 The risyphus package makes describing your data and the standard analyses fast
 and reproducible:
 
 * By generating descriptive tables in standard form ("baseline tables").
-* By allowing you to keep track of which variabels you have included in
+
+* By allowing you to keep track of which variables you have included in
 potentially very many tables.
+
 * By collecting output from many similar models into a single table.
+
 * By playing nicely with R Markdown and Knitr in order to generate
 material you can easily share with non-statisticians.
+
 
 The benefit from using risyphus are fourfold:
 
 1. Spend your time and resources where it is needed the most: You can quickly
-transition from reading the data to the intellectually satifying part of the "full analysis"!
+transition from reading the data to the intellectually satisfying part of the "full analysis"!
+
 1. Make progress that can be shared with co-investigators throughout the process.
+
 1. Quickly respond to updated data sets and additional requests: Just re-run the R-Markdown script to
 update all tables and basic analyses or add additional subgroups by minor changes in your code!
+
 1. Respond to reviewer questions easily: The structured approach to table generation
 makes it easy to track exactly which variables are used in which table.
 
 
-## What's the problem with standard tables?
-
-### Why statistical tables are not just a collection of numbers of the same sort
+## Why statistical tables are not just a collection of numbers
 
 A table in statistical programs is typically a rectangular arrangement of 
 (computed) numbers with additional text information on the top row and left-most
@@ -70,7 +82,7 @@ replacements. Example: A p-value of 0.14533874 might be required to be displayed
 respectively, and thus refer to "mean (std. dev.)" and "count (%)", respectively.
 
 
-### How does risyphus approach this problem?
+## How does risyphus approach this problem?
 
 Functions in risyphus that return "tables" all do the following behind the scenes
 and (for most part) hidden from the user:
@@ -79,9 +91,9 @@ and (for most part) hidden from the user:
 
 1. They compute whatever is required.
 
-1. They stich the requested output together.
+1. They stitch the requested output together.
 
-1. They return the table in form of a rectangular array of mode **character**.
+1. They return the table in form of a rectangular array of mode **character** (a matrix).
 
 
 The last aspect is crucial in understanding how risyphus returns statistical tables.
@@ -91,7 +103,7 @@ The reasons why every cell must contain character values are these:
 "<.001" is *not* a number as far as the computer is concerned.
 
 1. Character values allow for the most reliable rendering of numbers in
-prespecified formats: If "34.7 (2.34)" is the template for presentation, then
+pre-specified formats: If "34.7 (2.34)" is the template for presentation, then
 "45.2 (3.00)" is required and not a sudden change to "45.2 (3)".
 
 The above differences between simple collection of numbers and statistical tables
@@ -100,83 +112,46 @@ fuel these bad habits:
 * Excessive output that includes the needed numbers "somewhere". (Statistician does
 not have the bandwidth to collect and arrange the relevant numbers for the investigator.)
 
-* Statisticians and data analysts spend a hugh amount of time on 
+* Statisticians and data analysts spend a huge amount of time on 
 cutting and pasting numbers as well as rounding numbers "manually" - all operations
 that are prone to introducing errors. (Statistician devotes a lot of time to keeping
 simple tables neat and up-to-date.)
 
-* Artifically enforced "deadlines" after which no further corrections to the
+* Artificially enforced "deadlines" after which no further corrections to the
 data are accepted. (Known corrections are ignored in order to proceed to some
-meaningful analysis.)
+more elaborate analysis as opposed to updating descriptive summaries *again*...)
 
 The functions in risyphus allow anyone to break these bad habits.
 
 
 
-## The BLtable function
+## Core functionality
+
+| Function | Description | Remark
+|:--------:|:---------------------------|:---------------------|
+| BLtable  | A "baseline table" with two groups. | |
+| CONtable | Contingency table. | Row, column, or cell percentages are optional. |
+| ONEtable | Table describing/summarizing variables. | Similar to BLtable just without the two groups. With or without information about missing entries. |
+| HRtable  | Table listing hazard rate ratios (HRs) from Cox regression/proportional hazards model "one factor at a time". | The model can be adjusted for some variables, e.g., age and/or gender, while estimating the effect of the additional variables "one at a time". |
+| ListVariables | Summarizes all variables in a data frame. | Useful to check on how data is read into R and which values are actually present before any data manipulation starts. |
+| ORtable  | Table listing odds ratios (ORs) from logistic regression "one factor at a time". | The model can be adjusted for some variables, e.g., age and/or gender, while estimating the effect of the additional variables "one at a time". |
+| ORtableGLMER | Like ORtable but allowing for a random effect (grouping).| Based on
+generalized logistic regression with a provided ID for clustering. |
+
+
+## Utility functions
+
+Some utility functions enhance a more streamlined data analysis, e.g.:
+
+| Function | Description | Remark
+|:--------:|:---------------------------|:---------------------|
+| BMIgroup | Returns standard Body-Mass-Index (BMI) groups based on BMI-values. | |
+| CheckNames | Tests the identity of variable names in two data sets. | Useful to quickly check if all variable names are indeed *identical* in an "updated data set" and its earlier version. |
 
 
 
+*****
 
+End of document
 
-
-
-Vignette Info
-
-Tools/utility functions to facilitate recurrent tasks with focus on
-logistic regression, Cox regression, and studies/clinical trials with two groups.
-
-This package contains functions that facilitate laborious steps
-in most data analysis tasks, such as basic variable description,
-compilation of baseline tables comparing two groups, odds-ratio tables
-based on logistic regression, or hazard-ratio tables based on
-Cox proportional hazards models. The name of this package is derived
-from the Greek mythological figure Sisyphus (Sisyphus for R = risyphus),
-who was doomed to roll a big boulder up a hill just to see it roll down
-again ad infinitum. Somehow I related to the laborious task of keeping all
-standard tables up to date in a developing project as Sisyphean, and it all
-too often consumed too much time and energy devoted to a project. My
-intention with this package is to do standard tasks well and to free time
-and resources for better statistical analyses and to facilitate
-reproducible computing.
-
----
-
-
-## Styles
-
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
-
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
-
-## Figures
-
-The figure sizes have been customised so that you can easily put two images side-by-side. 
-
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
-```
-
-You can enable figure captions by `fig_caption: yes` in YAML:
-
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
-
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
-
-## More Examples
-
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
-
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
-```
-
-Also a quote using `>`:
-
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+*****

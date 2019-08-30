@@ -20,10 +20,17 @@ reproducible computing.
 Download/Installation
 ----
 This version of [risyphus on GitHub](https://github.com/FrThomas/risyphus)
-can be installed from R after installing the `devtools` package.
+can be installed from R after installing the `remotes` package (has superseeded
+this functionality previously provided by `devtools`).
 ```r
-install.packages("devtools") # Will install from CRAN.
-devtools::install_github(repo="FrThomas/risyphus") # Will install from GitHub.
+install.packages("remotes") # Will install from CRAN.
+
+# Install and build vignettes:
+remotes::install_github("FrThomas/risyphus", build_opts = c("--no-resave-data", "--no-manual"))
+
+# Install without building vignettes (faster, but then only the help-function is available, not the vignettes):
+remotes::install_github(repo="FrThomas/risyphus") # Will install from GitHub.
+
 ```
 
 Current Goals
@@ -35,14 +42,15 @@ Current Goals
 
 Recent additions and changes
 -----
-* ORtableGLMER: Function to compile table of odds ratios based on
-generalized logistic regression with a provided ID for clustering.
-* ContTable: Function to compile contingency tables.
-* ONEtable: Function to compile table for one group (with or without information about missing entries).
-* ORtable: Function to compile table of odds ratios based on logistic regression.
-* HRtable: Function to compile table of hazard ratios based on Cox proportional 
-hazards model.
 
+* Vignette "Introduction to risypus" added - requires that you install risyphus
+so that vignettes are actually build (see above).  See which vignettes are available (after install):
+```r
+library("risyphus")
+vignette(package = "risyphus") # Gives list of available vignettes.
+vignette("Introduction to risyphus") # Shows the vignette "Introduction to risyphus".
+
+```
 
 TO DO
 -----
@@ -55,6 +63,13 @@ TO DO
 
 History
 -----
+* 2019-08-30: Vignette *Introduction to risyphus* added.
 * 2018-04-06: risyphus made publicly available on [GitHub](https://github.com/FrThomas/risyphus).
 * 2017-02-12: Work on risyphus begins in a private GitHub repository.
 
+
+*****
+
+End of document
+
+*****
