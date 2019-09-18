@@ -25,10 +25,17 @@ this functionality previously provided by `devtools`).
 ```r
 install.packages("remotes") # Will install from CRAN.
 
-# Install and build vignettes:
-remotes::install_github("FrThomas/risyphus", build_opts = c("--no-resave-data", "--no-manual"))
+# Install and build vignettes (tested on macOS Mojave and Windows 10):
+remotes::install_github("FrThomas/risyphus", build = TRUE, build_vignettes = TRUE,
+                        build_opts = c("--no-resave-data", "--no-manual"),
+                        force = TRUE)
 
-# Install without building vignettes (faster, but then only the help-function is available, not the vignettes):
+# After install:
+library("risyphus")
+vignette(package = "risyphus") # Gives list of available vignettes.
+vignette("Introduction", package = "risyphus") # Shows the vignette "Introduction to risyphus".
+
+# Note: Install without building vignettes (faster, but then only the help-function is available, not the vignettes):
 remotes::install_github(repo="FrThomas/risyphus") # Will install from GitHub.
 
 ```
@@ -43,12 +50,12 @@ Current Goals
 Recent additions and changes
 -----
 
-* Vignette "Introduction to risypus" added - requires that you install risyphus
+* Vignette "Introduction to risyphus" added - requires that you install risyphus
 so that vignettes are actually build (see above).  See which vignettes are available (after install):
 ```r
 library("risyphus")
 vignette(package = "risyphus") # Gives list of available vignettes.
-vignette("Introduction to risyphus") # Shows the vignette "Introduction to risyphus".
+vignette("Introduction", package = "risyphus") # Shows the vignette "Introduction to risyphus".
 
 ```
 

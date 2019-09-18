@@ -127,6 +127,16 @@ The functions in risyphus allow anyone to break these bad habits.
 
 ## Core functionality
 
+Help for any of below listed function is assessed through the standard R help system, e.g.:
+
+```{r echo = TRUE, eval = FALSE}
+library("risyphus")
+help(package="risyphus") # List of all available help-topics.
+help(BLtable) # Show help for function BLtable.
+
+```
+
+
 | Function | Description | Remark
 |:--------:|:---------------------------|:---------------------|
 | BLtable  | A "baseline table" with two groups. | |
@@ -135,8 +145,7 @@ The functions in risyphus allow anyone to break these bad habits.
 | HRtable  | Table listing hazard rate ratios (HRs) from Cox regression/proportional hazards model "one factor at a time". | The model can be adjusted for some variables, e.g., age and/or gender, while estimating the effect of the additional variables "one at a time". |
 | ListVariables | Summarizes all variables in a data frame. | Useful to check on how data is read into R and which values are actually present before any data manipulation starts. |
 | ORtable  | Table listing odds ratios (ORs) from logistic regression "one factor at a time". | The model can be adjusted for some variables, e.g., age and/or gender, while estimating the effect of the additional variables "one at a time". |
-| ORtableGLMER | Like ORtable but allowing for a random effect (grouping).| Based on
-generalized logistic regression with a provided ID for clustering. |
+| ORtableGLMER | Like ORtable but allowing for a random effect (grouping).| Based on generalized logistic regression with a provided ID for clustering. |
 
 
 ## Utility functions
