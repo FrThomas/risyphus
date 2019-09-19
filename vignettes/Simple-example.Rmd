@@ -38,7 +38,7 @@ Here we add an image:
 
 ![In addition skewed (using Paint)](Vignettes_images/test_link_image_v3.png)
 
-
+![Resized to 300 pixel wide (using Paint)](Vignettes_images/test_link_image_v4.png)
 
 
 
