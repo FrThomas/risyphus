@@ -4,7 +4,7 @@ author: "Fridtjof Thomas"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Introduction to risyphus}
+  %\VignetteIndexEntry{How to use risyphus: A simple example}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
