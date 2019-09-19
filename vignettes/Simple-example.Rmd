@@ -29,12 +29,29 @@ This simple example will show:
 ## Using a function for knitr directly:
 
 ```{r }
-library(knitr)
-include_graphics(path = 'Vignettes_images/test_link_image.png', dpi = 200)
+
+knitr::include_graphics(path = 'Vignettes_images/test_link_image.png', dpi = 200)
 
 
 ```
 
+Using a function for knitr directly:
+
+```{r out.height=300, out.width=300}
+
+knitr::include_graphics(path = 'Vignettes_images/test_link_image.png')
+
+```
+
+
+Or like this?
+
+```{r out.width="50%"}
+
+knitr::include_graphics(path = 'Vignettes_images/test_link_image.png')
+
+
+```
 
 
 ## Used packages
