@@ -32,48 +32,6 @@ Here we add an image:
 
 
 
-Can this been done within R?  Let's check it out!
-
-```{r echo = TRUE, message=FALSE, fig.height=7, fig.width=7}
-library(imager)
-image_test <- load.image('Vignettes_images/test_link_image.png')
-plot(image_test, axes=FALSE)
-
-
-```
-
-
-Using a function for knitr directly:
-
-```{r out.height=300, out.width=300}
-library(knitr)
-include_graphics(path = 'Vignettes_images/test_link_image.png')
-
-
-```
-
-
-
-Or like this?
-
-```{r }
-library(knitr)
-include_graphics(path = 'Vignettes_images/test_link_image.png', dpi = 200)
-
-
-```
-
-
-Or like this?
-
-```{r out.width="50%"}
-library(knitr)
-include_graphics(path = 'Vignettes_images/test_link_image.png')
-
-
-```
-
-
 ## Used packages
 
 List packages
