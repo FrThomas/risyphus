@@ -26,7 +26,23 @@ This simple example will show:
 
 ## Test image
 
-## Using a function for knitr directly:
+## Test image: Works for vignettes (image in subfolder of Rmd-file folder)
+
+Here we add an image: 
+
+![Original image](Vignettes_images/test_link_image.png)
+
+
+![Resized to 600 pixel wide (using Paint)](Vignettes_images/test_link_image_v2.png)
+
+
+![In addition skewed (using Paint)](Vignettes_images/test_link_image_v3.png)
+
+
+
+
+
+## Using a function for knitr directly: Works for vignettes
 
 ```{r }
 
