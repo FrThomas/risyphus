@@ -26,9 +26,14 @@ This simple example will show:
 
 ## Test image
 
-Here we add an image: 
+## Using a function for knitr directly:
 
-![Alt text](Vignettes_images/test_link_image.png)
+```{r }
+library(knitr)
+include_graphics(path = 'Vignettes_images/test_link_image.png', dpi = 200)
+
+
+```
 
 
 
