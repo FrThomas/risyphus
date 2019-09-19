@@ -63,11 +63,11 @@ makes it easy to track exactly which variables are used in which table.
 
 ## Why statistical tables are not just a collection of numbers
 
-A table in statistical programs is typically a rectangular arrangement of 
+A table in statistical *programs* is typically a rectangular arrangement of 
 (computed) numbers with additional text information on the top row and left-most
 column.
 
-A table in a statistical journal contains non-trivial changes to this basic idea.
+A table in a statistical *journal* contains non-trivial changes to this basic idea.
 Most notably in these respects:
 
 * Not all numbers are treated the same: sometimes rounding is required, sometimes
@@ -75,10 +75,10 @@ replacements. Example: A p-value of 0.14533874 might be required to be displayed
 0.145, but 0.00000347 is to become <.001 and not 0.000.
 
 * A table cell contains more than one computed number. Example: An entry might read
-34.7 (2.34) and is to be interpreted as mean 34.7 and standard deviation 2.34.
+34.72 (2.34) and is to be interpreted as mean 34.72 and standard deviation 2.34.
 
 * Numbers that look the same have different meanings depending on context. Example:
-"34.7 (2.34) " and "45 (19)" might refer to a continuous and discrete variable,
+"34.72 (2.34) " and "45 (19)" might refer to a continuous and discrete variable,
 respectively, and thus refer to "mean (std. dev.)" and "count (%)", respectively.
 
 
@@ -103,39 +103,30 @@ The reasons why every cell must contain character values are these:
 "<.001" is *not* a number as far as the computer is concerned.
 
 1. Character values allow for the most reliable rendering of numbers in
-pre-specified formats: If "34.7 (2.34)" is the template for presentation, then
-"45.2 (3.00)" is required and not a sudden change to "45.2 (3)".
+pre-specified formats: If "34.72 (2.34)" is the template for presentation, then
+"45.21 (3.00)" is required and not a sudden change to "45.21 (3)".
 
-The above differences between simple collection of numbers and statistical tables
+The above differences between simple collection of numbers and statistical summary tables
 fuel these bad habits:
 
-* Excessive output that includes the needed numbers "somewhere". (Statistician does
+* Excessive output that includes the needed numbers "somewhere". (The statistician/data analyst does
 not have the bandwidth to collect and arrange the relevant numbers for the investigator.)
 
 * Statisticians and data analysts spend a huge amount of time on 
-cutting and pasting numbers as well as rounding numbers "manually" - all operations
-that are prone to introducing errors. (Statistician devotes a lot of time to keeping
+cutting and pasting numbers as well as rounding numbers "manually" - operations
+that are prone to introducing errors in addition to the time they are consuming.
+(The statistician/data analyst devotes a lot of time to keeping
 simple tables neat and up-to-date.)
 
 * Artificially enforced "deadlines" after which no further corrections to the
-data are accepted. (Known corrections are ignored in order to proceed to some
-more elaborate analysis as opposed to updating descriptive summaries *again*...)
+data are accepted. (Known corrections are ignored in order to proceed to the
+"real analysis" as opposed to updating descriptive summaries and basic steps *again*...)
 
-The functions in risyphus allow anyone to break these bad habits.
+The functions in risyphus allow anyone to break above bad habits.
 
 
 
 ## Core functionality
-
-Help for any of below listed function is assessed through the standard R help system, e.g.:
-
-```{r echo = TRUE, eval = FALSE}
-library("risyphus")
-help(package="risyphus") # List of all available help-topics.
-help(BLtable) # Show help for function BLtable.
-
-```
-
 
 | Function | Description | Remark
 |:--------:|:---------------------------|:---------------------|
@@ -146,6 +137,15 @@ help(BLtable) # Show help for function BLtable.
 | ListVariables | Summarizes all variables in a data frame. | Useful to check on how data is read into R and which values are actually present before any data manipulation starts. |
 | ORtable  | Table listing odds ratios (ORs) from logistic regression "one factor at a time". | The model can be adjusted for some variables, e.g., age and/or gender, while estimating the effect of the additional variables "one at a time". |
 | ORtableGLMER | Like ORtable but allowing for a random effect (grouping).| Based on generalized logistic regression with a provided ID for clustering. |
+
+Help for any of above listed function is assessed through the standard R help system, e.g.:
+
+```{r echo = TRUE, eval = FALSE}
+library("risyphus")
+help(package="risyphus") # List of all available help-topics.
+help(BLtable) # Show help for function BLtable.
+
+```
 
 
 ## Utility functions
