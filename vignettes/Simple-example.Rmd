@@ -234,7 +234,7 @@ Note that above gender specific tables contain 63 numbers each, and the combined
 table (both genders) contains 76 numbers for a total of 202 numbers for these
 three short tables only!
 
-Also note that that the function call would be *unchanged* when including
+Also note that the function call would be *unchanged* when including
 additional variables: all we have to do is to list these additional
 variables in the data set submitted to `info = ` (assuming the variable exists 
 already in the main data set).

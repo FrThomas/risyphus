@@ -91,6 +91,7 @@ TO DO
 
 History
 -----
+* 2019-09-20: Vignette *How to use risyphus: A simple example* added.
 * 2019-08-30: Vignette *Introduction to risyphus* added.
 * 2018-04-06: risyphus made publicly available on [GitHub](https://github.com/FrThomas/risyphus).
 * 2017-02-12: Work on risyphus begins in a private GitHub repository.
