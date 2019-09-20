@@ -34,7 +34,7 @@
 #'
 #' A dataset containing typical entries for baseline tables
 #'
-#' @format A data frame with 100 rows and 5 variables:
+#' @format A data frame with 100 rows and 6 variables:
 #' \describe{
 #'  \item{ID}{Fictitious ID}
 #'  \item{Group}{group membership - GroupA or GroupB (as text)}

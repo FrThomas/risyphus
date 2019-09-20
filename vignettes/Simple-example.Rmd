@@ -13,67 +13,269 @@ vignette: >
 
 ---
 
->This is a test document only. Content will be added soon.
-
-## Outline
-
-This simple example will show:
-
-* how to use a function in risyphus.
-
-* how to get the risyphus functionality into html-output using R Markdown.
 
 
-## Test image
+## Example Description
+In this simple example, we will use a build-in data set to create a table
+that compares two groups with each other. In the medical field, such tables are
+almost always presented for
 
-## Test image: Works for vignettes (image in subfolder of Rmd-file folder)
+* clinical trials, in which case they show demographics, anthropomorphics, medical
+history, etc. at baseline, i.e. at enrollment/before the trial's active intervention
+starts. 
+* observational studies, in which case they typically show demographics,
+anthropomorphics, medical history, etc. at the point in time that defines "entry
+into the study" such as the day a patient presented with certain symptoms.
 
-Here we add an image: 
+Remark: In a randomized clinical trial (RCT) associated p-values are debatable
+since all "imbalances" must be due to coincidental differences and cannot be associated
+with treatment assignment. Nevertheless, p-values are typically provided and can
+be used to assess the integrity of the random assignment to the study arms and/or
+whether specific traits are effectively balanced across study arms.
 
-![Original image](Vignettes_images/test_link_image.png)
+## A baseline table created with risyphus
+The synthetic data set `example_data` is included in the installation of risyphus. 
+It includes 100 (simulated) individuals and 5 variables:
 
+1. ID: Fictitious ID
+1. Group: group membership - GroupA or GroupB (as text)
+1. Gender: Fictitious gender as example of a binary variable (as text)
+1. Age: Fictitious age in years as example of a continuous variable
+1. Some.measure: Fictitious continuous measure with skewed distribution.
+1. Educ: Fictitious education level as example of a factor (with 8 possibly unused factor levels)
 
-![Resized to 600 pixel wide (using Paint)](Vignettes_images/test_link_image_v2.png)
-
-
-![In addition skewed (using Paint)](Vignettes_images/test_link_image_v3.png)
-
-![Resized to 300 pixel wide (using Paint)](Vignettes_images/test_link_image_v4.png)
-
-
-
-## Using a function for knitr directly: Works for vignettes
-
+It can be printed by simply calling it:
 ```{r }
+library(risyphus)
+summary(example_data)
+```
 
-knitr::include_graphics(path = 'Vignettes_images/test_link_image.png', dpi = 200)
-
+The information about which variables to include in the table and which
+statistical tests to apply is provided in a second data set named `example_variables`:
+```{r }
+example_variables
 
 ```
 
-Using a function for knitr directly:
-
-```{r out.height=300, out.width=300}
-
-knitr::include_graphics(path = 'Vignettes_images/test_link_image.png')
-
-```
-
-
-Or like this?
-
-```{r out.width="50%"}
-
-knitr::include_graphics(path = 'Vignettes_images/test_link_image.png')
-
+A variable *not* listed above is the one that defines the two groups, namely
+"Group" in our example.  This information needs to be submitted to the 
+function `BLtable` as well, and we get a compiled "baseline table" as
+follows (depending on the width of the output, the rectangular character matrix
+might be displayed as several blocks):
+```{r }
+BLtable(data = example_data, info = example_variables, group.var = "Group")
 
 ```
 
+The output is a character matrix and is intended to be submitted to some other
+function that creates the table to be displayed. The `knitr`-function `kable`
+is a simple choice (`knitr` must be installed for this to work):
+```{r kable}
+mytable <- BLtable(data = example_data, info = example_variables, group.var = "Group")
+knitr::kable(mytable,
+             caption = "Table: Baseline covariates by gender. Shown are
+          mean (std.dev.) and count (%), respectively, depending on
+          whether the variable is continuous or discrete.")
 
-## Used packages
+```
 
-List packages
+Other simple functions that can be used to display the table in html or other
+formats are provided by the
+[pander package](https://cran.r-project.org/web/packages/pander/pander.pdf)
+and the
+[xtable package](https://cran.r-project.org/web/packages/xtable/xtable.pdf).
+The [htmlTable package](https://cran.r-project.org/web/packages/htmlTable/htmlTable.pdf)
+gives detailed control over tables in html. 
 
+## Anatomy of the Function Call
+The function call above
+```{r eval=FALSE}
+BLtable(data = example_data, info = example_variables, group.var = "Group")
+```
+provides information about the data set (example_data), which variables to use 
+for the table (example_variables), and which variable defines the two groups ("Group").
+
+
+### `group.var = "Group"`
+"Group" *must* be a binary variable and anything else than exactly two groups will
+cause an error. If "Group" is not binary, the data set *must* be processed to make it
+binary *before* it is submitted to `BLtable`. Regularly occurring problems in
+"perceived binary" variables are coding errors leading to more than two groups,
+which can be checked by:
+```{r }
+unique(example_data$Group)
+
+```
+
+or by
+```{r }
+levels(example_data$Group)
+```
+
+or by printing a summary, which also allows to verify that none of the two groups
+are empty (if `summary` does not print a count-summary as below, the variable is
+not a formal factor and will need to be changed accordingly):
+```{r }
+summary(example_data$Group)
+```
+
+
+
+Another source of "unexpectedly" more than two groups originates from
+subsetting a factor without dropping unused factor levels (the default in R is
+to *not* drop factor levels). E.g., if race is coded as "Black", "White", "Other/Multiple",
+and the subset of "Black" and "White" is submitted to `BLtable`, the factor (Race)
+will still have three (and not two!) levels, unless the user took action to drop the
+unused factor level. Garrett Grolemund and Hadley Wickham describe 
+[factors](https://r4ds.had.co.nz/factors.html) in detail in
+their book [R for Data Science](https://r4ds.had.co.nz/factors.html).
+
+### `info = example_variables`
+This data set provides information about which variables to include in the table,
+which name to give/print in the table, and which statistical test to apply
+for that variable. Tests for categorical variables *require* the variable to be 
+a (formal) factor in the data set. Garrett Grolemund and Hadley Wickham describe 
+[factors](https://r4ds.had.co.nz/factors.html) in detail in
+their book [R for Data Science](https://r4ds.had.co.nz/factors.html).
+
+While a name different from the variable name can be specified to be printed
+in the table, all *factor levels* will have the name extracted from their
+respective factor label, and the order of display will be the order defined 
+by the formal factor definition in the data set. You can change that order by
+first reordering the respective factor levels and then submitting the data
+to `BLtable`. Variable names are more restrictive, which motivates the option
+to allow for a different name.  Regularly it will be helpful to give a more
+descriptive name than the formal variable name, and/or to add additional
+information such as a measurement unit. A good table should prominently
+display all information needed to correctly interpret its content. Obscure variable
+names, unclear measurement units, and/or undefined grouping levels should be
+avoided.
+
+In practical use, it is recommended to organize `info = example_variables` in a
+csv-file or spreadsheet and to import and pre-process it from there. That way 
+hundreds of variables in potentially different versions can be organized in a single
+spreadsheet and different columns define which variable is used in which table 
+(frequently very helpful if a complete analysis contains many tables and 
+subgroup analyses).
+
+The order of display of the variables is defined by the order of appearance in
+`info = example_variables`. It is regularly beneficial to logically group
+variables, typically first listing demographics, anthropomorphics, and
+socioeconomic information, followed by medical history, etc. 
+
+### `data = example_data`
+The submitted data set *must* contain all variables used as specified in 
+`info = example_variables` and the variable `group.var = "Group"`.  To reiterate:
+All variables for categorical measures *must* be formal factors in the data set, and
+the variable defining the two groups *must* be a factor with exactly two levels.
+Garrett Grolemund and Hadley Wickham describe 
+[factors](https://r4ds.had.co.nz/factors.html) in detail in
+their book [R for Data Science](https://r4ds.had.co.nz/factors.html).
+
+### Factors in R
+Did I mention that [factors](https://r4ds.had.co.nz/factors.html) are described
+in detail in the book [R for Data Science](https://r4ds.had.co.nz/factors.html)?
+You can use any other book or source of information to learn about factors in R,
+of course, but you really need to be on top of the "factor game" if you want
+to use risyphus effectively. Especially, you will need to know how to 
+do the following:
+
+* create factors in R,
+* change factor labels,
+* drop unused factor levels,
+* reorder factor levels.
+
+## The Power of risyphus
+Let's use the above outlined principles to produce a summary table that
+contains the following changes:
+
+* use two digits precision even for proportions.
+* display four digits for the p-values.
+
+Here is the code to produce such a table (note that the needed changes are 
+limited to two options in the `BLtable` function):
+
+```{r kable-digits}
+mytable <- BLtable(data = example_data, info = example_variables, group.var = "Group",
+                   sign.digits.prop = 2, pvalue.digits = 4)
+knitr::kable(mytable,
+             caption = "Table: Baseline covariates by gender. Shown are
+          mean (std.dev.) and count (%), respectively, depending on
+          whether the variable is continuous or discrete.")
+
+```
+
+And how about two tables for each gender? Here is the code for females:
+
+```{r kable-females}
+this_data <- example_data[example_data$Gender == "female",]
+this_info <- example_variables[example_variables$Variable != "Gender", ]
+mytable <- BLtable(data = this_data, info = this_info, group.var = "Group")
+knitr::kable(mytable,
+             caption = "Table: Baseline covariates for females. Shown are
+          mean (std.dev.) and count (%), respectively, depending on
+         whether the variable is continuous or discrete.")
+```
+
+
+And here for males:
+
+```{r kable-males}
+this_data <- example_data[example_data$Gender == "male",]
+this_info <- example_variables[example_variables$Variable != "Gender", ]
+mytable <- BLtable(data = this_data, info = this_info, group.var = "Group")
+knitr::kable(mytable,
+             caption = "Table: Baseline covariates for males. Shown are
+          mean (std.dev.) and count (%), respectively, depending on
+         whether the variable is continuous or discrete.")
+```
+
+Note that above gender specific tables contain 63 numbers each, and the combined
+table (both genders) contains 76 numbers for a total of 202 numbers for these
+three short tables only!
+
+Also note that that the function call would be *unchanged* when including
+additional variables: all we have to do is to list these additional
+variables in the data set submitted to `info = ` (assuming the variable exists 
+already in the main data set).
+
+
+## Other Functions in risyphus and further information
+All other functions relating to tables in `risyphus` are working in the same
+way as `BLtabel` shown above and follow this approach:
+
+1. call the function of your choice to compile the table information,
+1. pass the resulting character matrix to a different function that 
+displays the output. 
+
+The vignette *Introduction to risyphus* 
+[`vignette("Introduction", package = "risyphus")`] contains a table with the
+core functions available after installing risyphus.
+
+Forthcoming: The vignette *Combining  risyphus and R Markdown* 
+[`vignette("risyphus-RMarkdown", package = "risyphus")`] contains a detailed example
+of how to harvest the true power of risyphus (and R Markdown) to generate reports.
+
+Forthcoming: The vignette *risyphus sample code* 
+[`vignette("risyphus-code", package = "risyphus")`] contains sample code
+for each function in risyphus including a suitable subsequent call to 
+a function that produces the corresponding html-table (including hints for
+trouble shooting).
+
+
+
+## Software/R packages used for this document
+
+The following software/R-packages are used in this vignette and
+are gratefully acknowledged:
+
+
+| Package  | Reference       |
+|:-----:|:---------------------------------------------------------------------|
+| R | `r citation("base")$textVersion` |
+| R Studio | RStudio Team (2016). RStudio: Integrated Development for R. RStudio, Inc., Boston, MA URL http://www.rstudio.com/. |
+| rmarkdown | `r citation("rmarkdown")$textVersion`
+| knitr | `r citation("knitr")$textVersion` |
 
 
 *****
