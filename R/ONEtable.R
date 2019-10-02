@@ -143,6 +143,11 @@ ONEtable <- function(data, info, sign.digits=2, sign.digits.prop=1,
                     show.missing.info = TRUE,
                     test.input = FALSE,
                     factor.level.bullet = "- ", linebreak.tag = ""){
+
+  # Convert tibbles to regular data frames without need to load package "tibbles":
+  # Note: a tibble tests TRUE for as.data.frame(tbl).
+  if ("tbl" %in% class(data)) { data <- as.data.frame(data) }
+
   # Test input:
   if (test.input) {  }
   ### ADD TEST FOR FACTORS for all factors!

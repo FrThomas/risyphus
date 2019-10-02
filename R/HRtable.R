@@ -225,6 +225,10 @@ HRtable.text <- function(this.data, this.outcome, this.var,
 HRtable <- function(data, this.outcome, info, sign.digits=2, sign.digits.HR=3, pvalue.digits=3, pvalue.cutoff=0.001,
                     test.input = FALSE,
                     factor.level.bullet = "- ", less.than.character = "< ", linebreak.tag = ""){
+  # Convert tibbles to regular data frames without need to load package "tibbles":
+  # Note: a tibble tests TRUE for as.data.frame(tbl).
+  if ("tbl" %in% class(data)) { data <- as.data.frame(data) }
+
   # Note: this.outcome needs to be a text string as input for coxph, e.g.,
   #       "Surv(Follow_up_Years, Event_Death)"
 

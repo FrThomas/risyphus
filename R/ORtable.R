@@ -228,6 +228,11 @@ ORtable.text <- function(this.data, this.outcome, this.var,
 ORtable <- function(data, this.outcome, info, sign.digits=2, sign.digits.OR=3, pvalue.digits=3, pvalue.cutoff=0.001,
                     test.input = FALSE,
                     factor.level.bullet = "- ", less.than.character = "< ", linebreak.tag = ""){
+
+  # Convert tibbles to regular data frames without need to load package "tibbles":
+  # Note: a tibble tests TRUE for as.data.frame(tbl).
+  if ("tbl" %in% class(data)) { data <- as.data.frame(data) }
+
   # Test input:
   if (test.input) {  } # Currently no meaningful tests implemented.
   ### ADD TEST FOR FACTORS for all factors!

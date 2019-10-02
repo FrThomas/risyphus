@@ -283,6 +283,11 @@ table.text <- function(this.data, this.var, group.var, this.GroupA, this.GroupB,
 BLtable <- function(data, info, group.var, sign.digits=2, sign.digits.prop=1, pvalue.digits=3, pvalue.cutoff=0.001,
                     test.input = TRUE,
                     factor.level.bullet = "- ", less.than.character = "< ", linebreak.tag = ""){
+
+  # Convert tibbles to regular data frames without need to load package "tibbles":
+  # Note: a tibble tests TRUE for as.data.frame(tbl).
+  if ("tbl" %in% class(data)) { data <- as.data.frame(data) }
+
   # Test input:
   if (test.input) { grouptest(data, group.var) }
   ### ADD TEST FOR FACTORS for all factors!

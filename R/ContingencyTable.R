@@ -53,6 +53,11 @@
 #' CONtable(example_data, row.var = "Educ", col.var = "Gender", show.props = "row", sign.digits.prop=1)
 #' @export
 CONtable <- function(data, row.var, col.var, show.props = "cell", sign.digits.prop=1, test.input = TRUE){
+
+  # Convert tibbles to regular data frames without need to load package "tibbles":
+  # Note: a tibble tests TRUE for as.data.frame(tbl).
+  if ("tbl" %in% class(data)) { data <- as.data.frame(data) }
+
   # Test input:
   if (test.input) {  }
   ### ADD TEST FOR FACTORS for all factors!

@@ -75,14 +75,13 @@ Current Goals
 
 Recent Additions and Changes
 -----
-
+* All functions now accept tibbles in addition to data frames.
 * Vignette "Introduction to risyphus" added - requires that you install risyphus
 in a way that vignettes are actually build (see above).
 
 
 TO DO
 -----
-* BLtable, ORtable, HRtable: Make BLtable work with tibbles.
 * BLtable: Refine handling of p-values (including no p-values)
 * BLtable, ORtable, HRtable: Option to add information about missing data for each variable.
 * Add variables to example data set to demonstrate ORtable and HRtable

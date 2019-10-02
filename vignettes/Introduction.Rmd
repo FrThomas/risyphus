@@ -18,19 +18,19 @@ vignette: >
 Statistical analyses come in many flavors, but they typically require the following 
 steps:
 
-* Read some data.
+1. Read some data.
 
-* Process that data: "make it ready for your analysis".
+1. Process that data: "make it ready for your analysis".
 
-* Describe the data you *exclude* from the analysis.
+1. Describe the data you *exclude* from the analysis.
 
-* Describe the data you *include* for the analysis.
+1. Describe the data you *include* for the analysis.
 
-* Describe the data for specific subgroups of interest.
+1. Describe the data for specific subgroups of interest.
 
-* Produce some standard analysis results.
+1. Produce some standard analysis results.
 
-* Produce the envisioned "full analysis".
+1. Produce the envisioned "full analysis".
 
 
 The risyphus package makes describing your data and the standard analyses fast
@@ -77,8 +77,9 @@ replacements. Example: A p-value of 0.14533874 might be required to be displayed
 * A table cell contains more than one computed number. Example: An entry might read
 34.72 (2.34) and is to be interpreted as mean 34.72 and standard deviation 2.34.
 
-* Numbers that look the same have different meanings depending on context. Example:
-"34.72 (2.34) " and "45 (19)" might refer to a continuous and discrete variable,
+* Numbers that 'look the same' originate from different procedures and
+have different meanings depending on context. Example:
+"35 (2.3) " and "45 (19.2)" might refer to a continuous and discrete variable,
 respectively, and thus refer to "mean (std. dev.)" and "count (%)", respectively.
 
 
@@ -106,7 +107,7 @@ The reasons why every cell must contain character values are these:
 pre-specified formats: If "34.72 (2.34)" is the template for presentation, then
 "45.21 (3.00)" is required and not a sudden change to "45.21 (3)".
 
-The above differences between simple collection of numbers and statistical summary tables
+The above differences/complications between *simple* collection of numbers and statistical *summary tables*
 fuel these bad habits:
 
 * Excessive output that includes the needed numbers "somewhere". (The statistician/data analyst does
@@ -116,13 +117,13 @@ not have the bandwidth to collect and arrange the relevant numbers for the inves
 cutting and pasting numbers as well as rounding numbers "manually" - operations
 that are prone to introducing errors in addition to the time they are consuming.
 (The statistician/data analyst devotes a lot of time to keeping
-simple tables neat and up-to-date.)
+simple tables up-to-date.)
 
 * Artificially enforced "deadlines" after which no further corrections to the
 data are accepted. (Known corrections are ignored in order to proceed to the
 "real analysis" as opposed to updating descriptive summaries and basic steps *again*...)
 
-The functions in risyphus allow anyone to break above bad habits.
+The functions in risyphus allow anyone to break above poor habits.
 
 
 

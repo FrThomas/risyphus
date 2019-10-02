@@ -51,6 +51,10 @@
 #'
 ListVariables <- function(data){
 
+  # Convert tibbles to regular data frames without need to load package "tibbles":
+  # Note: a tibble tests TRUE for as.data.frame(tbl).
+  if ("tbl" %in% class(data)) { data <- as.data.frame(data) }
+
   this.data <- data
   mytable <- data.frame(Variable=names(this.data), Missing=NA, Not.Missing=NA, N.unique=NA, Values=NA)
 
@@ -136,7 +140,7 @@ BMIgroup <- function(BMI.values){
     stop("The provided input in function BMIgroup() is not a vector and must be a vector.")
   }
   if (!(is.numeric(BMI.values))) {
-    stop("The provided input in function BMIgroup() is not numeric and must be a numeric.")
+    stop("The provided input in function BMIgroup() is not numeric and must be numeric.")
   }
 
   myBMI <- ifelse(is.na(BMI.values), NA,
