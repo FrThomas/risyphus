@@ -10,7 +10,6 @@
  \item{ORtable}{Indicator whether to include in BL table}
  \item{Table.label}{Label to use in the created table}
  \item{Type}{What type of variable this is: Continuous, Dichotomous, or Factor?}
- \item{Test}{Test to be used for p-value: t-test, Wilcoxon, Chi-square, or Fisher?)}
 }}
 \source{
 Synthetic data created by the package author

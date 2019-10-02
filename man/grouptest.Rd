@@ -19,5 +19,5 @@ Prints warning message and/or stops processing with error message printed.
 Function to test the dichotomous variable identifying the two groups in the BL-table.
 }
 \examples{
-Called by other function - not intended to be called by user directly.
+\dontrun{ Called by other function - not intended to be called by user directly. }
 }

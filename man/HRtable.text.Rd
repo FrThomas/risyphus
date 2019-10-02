@@ -40,5 +40,5 @@ Output used by \code{HRtable()}
 Function to compute and render text entries for HR-table
 }
 \examples{
-Called by other function - not intended to be called by user directly.
+\dontrun{ Called by other function - not intended to be called by user directly. }
 }

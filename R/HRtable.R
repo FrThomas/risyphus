@@ -45,7 +45,7 @@
 #'  \item{last_row}{Last table row used for the corresponding variable}
 #' }
 #' @examples
-#' Called by other function - not intended to be called by user directly.
+#' \dontrun{ Called by other function - not intended to be called by user directly. }
 #' @export
 HRtable.layout <- function(data, info){
   ### NOTE: Uses factor levels to determine table
@@ -88,7 +88,7 @@ HRtable.layout <- function(data, info){
 #' @inheritParams HRtable
 #' @return Output used by \code{HRtable()}
 #' @examples
-#' Called by other function - not intended to be called by user directly.
+#' \dontrun{ Called by other function - not intended to be called by user directly. }
 #' @export
 HRtable.text <- function(this.data, this.outcome, this.var,
                          this.type, sign.digits, sign.digits.HR, pvalue.digits, pvalue.cutoff, less.than.character){
@@ -97,20 +97,20 @@ HRtable.text <- function(this.data, this.outcome, this.var,
   if (this.type == "Continuous") { # Cox regression, one line output.
 
     cox_One <- survival::coxph(
-      as.formula(paste(this.outcome, " ~ ", this.var, sep = "")),
+      stats::as.formula(paste(this.outcome, " ~ ", this.var, sep = "")),
       data = this.data)
 
     this.pvalue <- summary(cox_One)$coefficients[1, "Pr(>|z|)"]
 
 
     list(
-      Col1 = paste0(formatC(exp(coefficients(cox_One)), digits=sign.digits.HR, format="f")),
+      Col1 = paste0(formatC(exp(stats::coefficients(cox_One)), digits=sign.digits.HR, format="f")),
       Col2 =
         paste0(
           "(",
-          formatC(exp(confint(cox_One))[1], digits=sign.digits.HR, format="f"),
+          formatC(exp(stats::confint(cox_One))[1], digits=sign.digits.HR, format="f"),
           "-",
-          formatC(exp(confint(cox_One))[2], digits=sign.digits.HR, format="f"),
+          formatC(exp(stats::confint(cox_One))[2], digits=sign.digits.HR, format="f"),
           ")"
         ),
       Col3 = ifelse(this.pvalue < pvalue.cutoff,
@@ -120,7 +120,7 @@ HRtable.text <- function(this.data, this.outcome, this.var,
   } else if ( (this.type %in% c("Dichotomous", "Factor") ) ) {
 
     cox_One <- survival::coxph(
-      as.formula(paste(this.outcome, " ~ ", this.var, sep = "")),
+      stats::as.formula(paste(this.outcome, " ~ ", this.var, sep = "")),
       data = this.data)
 
     # If two factor levels only, overall p-value will be marginal p-value
@@ -134,7 +134,7 @@ HRtable.text <- function(this.data, this.outcome, this.var,
     if (length(this.pvalue.coeff) == 1){
       this.pvalue <- this.pvalue.coeff
     } else{
-      this.pvalue <- anova(cox_One)[this.var, "Pr(>|Chi|)"]
+      this.pvalue <- stats::anova(cox_One)[this.var, "Pr(>|Chi|)"]
     }
 
 
@@ -147,12 +147,12 @@ HRtable.text <- function(this.data, this.outcome, this.var,
     # Table: First row cotains only overall p-value, and first factor level is reference-level.
     list(
       Col1 = c(" ", "Reference",
-               paste0(formatC(exp(coefficients(cox_One)), digits=sign.digits.HR, format="f"))),
+               paste0(formatC(exp(stats::coefficients(cox_One)), digits=sign.digits.HR, format="f"))),
       Col2 = c(" ", " ",
                paste0("(",
-                      formatC(as.numeric(exp(confint(cox_One))[,1]), digits=sign.digits, format="f"),
+                      formatC(as.numeric(exp(stats::confint(cox_One))[,1]), digits=sign.digits, format="f"),
                       "-",
-                      formatC(as.numeric(exp(confint(cox_One))[,2]), digits=sign.digits, format="f"),
+                      formatC(as.numeric(exp(stats::confint(cox_One))[,2]), digits=sign.digits, format="f"),
                       ")")
       ),
       Col3 = c(ifelse(this.pvalue < pvalue.cutoff,
@@ -220,7 +220,10 @@ HRtable.text <- function(this.data, this.outcome, this.var,
 #'    \code{linebreak.tag = "<br>"} (HTML tag to insert a single line break) is useful.
 #' @return An R character-matrix containing the compiled table information.
 #' @examples
-#' HRtable(data = example_data, info = example_variables, this.outcome = "Surv(Follow_up_Years, Event_Death)", test.input = TRUE)
+#' \dontrun{
+#' HRtable(data = example_data, info = example_variables,
+#'   this.outcome = "Surv(Follow_up_Years, Event_Death)", test.input = TRUE)
+#' }
 #' @export
 HRtable <- function(data, this.outcome, info, sign.digits=2, sign.digits.HR=3, pvalue.digits=3, pvalue.cutoff=0.001,
                     test.input = FALSE,

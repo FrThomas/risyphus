@@ -52,7 +52,7 @@ example_data <- data.frame(
   Group = factor(sample(rep(c("GroupA", "GroupB"), each = 50), size = 100, replace = FALSE)),
   Gender = factor(sample(c("male", "female"), size = 100, replace = TRUE, prob = c(0.3, 0.70))),
   Age = round(rnorm(100, 35, 4), digits = 2),
-  Some.measure = rweibull(100, shape = 20, scale = 10),
+  Some.measure = stats::rweibull(100, shape = 20, scale = 10),
   Educ = factor(sample(1:8, size = 100, replace = TRUE, prob = c(rep(0.10, 4), 0.30,  rep(0.10, 3))),
                 levels = 1:8,
                 labels = c(
@@ -104,7 +104,7 @@ usethis::use_data(example_data, example_variables, overwrite = TRUE)
 #' @inheritParams BLtable
 #' @return Prints warning message and/or stops processing with error message printed.
 #' @examples
-#' Called by other function - not intended to be called by user directly.
+#' \dontrun{ Called by other function - not intended to be called by user directly. }
 grouptest <- function(data, group.var){
   if (!(group.var %in% names(data))) {
     stop("The provided grouping variable does not exist in the provided data set.")
@@ -137,7 +137,7 @@ grouptest <- function(data, group.var){
 #'  \item{last_row}{Last table row used for the corresponding variable}
 #' }
 #' @examples
-#' Called by other function - not intended to be called by user directly.
+#' \dontrun{ Called by other function and not intended to be called by user directly. }
 #' @export
 BLtable.layout <- function(data, info){
   ### NOTE: Uses factor levels to determine table
@@ -180,7 +180,7 @@ BLtable.layout <- function(data, info){
 #' @inheritParams BLtable
 #' @return Output used by \code{BLtable()}
 #' @examples
-#' Called by other function - not intended to be called by user directly.
+#' \dontrun{ Called by other function - not intended to be called by user directly. }
 #' @export
 table.text <- function(this.data, this.var, group.var, this.GroupA, this.GroupB,
                        this.type, this.test, sign.digits, sign.digits.prop, pvalue.digits, pvalue.cutoff, less.than.character){
@@ -190,9 +190,9 @@ table.text <- function(this.data, this.var, group.var, this.GroupA, this.GroupB,
 
   if ((this.type == "Continuous") & (this.test %in% c("t-test", "Wilcoxon"))) {
     if (this.test == "t-test") {
-      this.pvalue <- t.test(this.data.GroupA, this.data.GroupB, alternative = "two.sided")$p.value
+      this.pvalue <- stats::t.test(this.data.GroupA, this.data.GroupB, alternative = "two.sided")$p.value
     } else if (this.test == "Wilcoxon") {
-      this.pvalue <- wilcox.test(this.data.GroupA, this.data.GroupB, alternative = "two.sided")$p.value
+      this.pvalue <- stats::wilcox.test(this.data.GroupA, this.data.GroupB, alternative = "two.sided")$p.value
     } else {
       this.pvalue <- "?.???"
     }
@@ -200,13 +200,13 @@ table.text <- function(this.data, this.var, group.var, this.GroupA, this.GroupB,
 
     list(
       Col1 = paste(formatC(mean(this.data.All, na.rm=TRUE), digits=sign.digits, format="f"), " (",
-                   formatC(sd(this.data.All, na.rm=TRUE), digits=sign.digits, format="f"), ")", sep = ""),
+                   formatC(stats::sd(this.data.All, na.rm=TRUE), digits=sign.digits, format="f"), ")", sep = ""),
       Col2 =
         paste(formatC(mean(this.data.GroupA, na.rm=TRUE), digits=sign.digits, format="f"), " (",
-              formatC(sd(this.data.GroupA, na.rm=TRUE), digits=sign.digits, format="f"), ")", sep = ""),
+              formatC(stats::sd(this.data.GroupA, na.rm=TRUE), digits=sign.digits, format="f"), ")", sep = ""),
       Col3 =
         paste(formatC(mean(this.data.GroupB, na.rm=TRUE), digits=sign.digits, format="f"), " (",
-              formatC(sd(this.data.GroupB, na.rm=TRUE), digits=sign.digits, format="f"), ")", sep = ""),
+              formatC(stats::sd(this.data.GroupB, na.rm=TRUE), digits=sign.digits, format="f"), ")", sep = ""),
       Col4 = ifelse(this.pvalue < pvalue.cutoff,
                     paste(less.than.character, pvalue.cutoff, sep=""),
                     formatC(this.pvalue, digits=pvalue.digits, format="f"))
@@ -214,7 +214,7 @@ table.text <- function(this.data, this.var, group.var, this.GroupA, this.GroupB,
   } else if ( (this.type %in% c("Dichotomous", "Factor")) & (this.test %in% c("Chi-square", "Fisher")) ) {
 
     this.table <- table(this.data[, this.var], this.data[,group.var])
-    this.table.margin <- addmargins(this.table, margin = 2, FUN = sum, quiet = TRUE)
+    this.table.margin <- stats::addmargins(this.table, margin = 2, FUN = sum, quiet = TRUE)
     this.table.prop <- (prop.table(this.table.margin, margin = 2)) * 100 # Relative counts in %.
 
     table.combined <- matrix(
@@ -223,9 +223,9 @@ table.text <- function(this.data, this.var, group.var, this.GroupA, this.GroupB,
       dimnames = dimnames(this.table.margin))
 
     this.pvalue <- ifelse(this.test == "Chi-square",
-                          chisq.test(this.table)$p.value,
+                          stats::chisq.test(this.table)$p.value,
                           ifelse(this.test == "Fisher",
-                                 fisher.test(this.table, simulate.p.value = TRUE, B = 500000)$p.value,
+                                 stats::fisher.test(this.table, simulate.p.value = TRUE, B = 500000)$p.value,
                                  "?.???"
                                  )
     )

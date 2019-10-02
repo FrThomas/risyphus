@@ -48,7 +48,7 @@
 #'  \item{last_row}{Last table row used for the corresponding variable}
 #' }
 #' @examples
-#' Called by other function - not intended to be called by user directly.
+#' \dontrun{ Called by other function - not intended to be called by user directly. }
 #' @export
 ORtable.layout <- function(data, info){
   ### NOTE: Uses factor levels to determine table
@@ -89,16 +89,16 @@ ORtable.layout <- function(data, info){
 #' @inheritParams ORtable
 #' @return Output used by \code{ORtable()}
 #' @examples
-#' Called by other function - not intended to be called by user directly.
+#' \dontrun{ Called by other function - not intended to be called by user directly. }
 #' @export
 ORtable.text <- function(this.data, this.outcome, this.var,
                          this.type, sign.digits, sign.digits.OR, pvalue.digits, pvalue.cutoff, less.than.character){
 
   if (this.type == "Continuous") { # Logistic regression, one line output.
 
-    glm_One <- glm(
-      as.formula(paste(this.outcome, " ~ ", this.var, sep = "")),
-      data = this.data, family = binomial)
+    glm_One <- stats::glm(
+      stats::as.formula(paste(this.outcome, " ~ ", this.var, sep = "")),
+      data = this.data, family = stats::binomial)
 
     this.pvalue <- summary(glm_One)$coefficients[-1, "Pr(>|z|)"]
 
@@ -109,13 +109,13 @@ ORtable.text <- function(this.data, this.outcome, this.var,
     #
 
     list(
-      Col1 = paste0(formatC(exp(coefficients(glm_One))[-1], digits=sign.digits.OR, format="f")),
+      Col1 = paste0(formatC(exp(stats::coefficients(glm_One))[-1], digits=sign.digits.OR, format="f")),
       Col2 =
         paste0(
           "(",
-          formatC(exp(confint.default(glm_One))[-1, 1], digits=sign.digits.OR, format="f"),
+          formatC(exp(stats::confint.default(glm_One))[-1, 1], digits=sign.digits.OR, format="f"),
           "-",
-          formatC(exp(confint.default(glm_One))[-1, 2], digits=sign.digits.OR, format="f"),
+          formatC(exp(stats::confint.default(glm_One))[-1, 2], digits=sign.digits.OR, format="f"),
           ")"
         ),
       Col3 = ifelse(this.pvalue < pvalue.cutoff,
@@ -124,9 +124,9 @@ ORtable.text <- function(this.data, this.outcome, this.var,
     )
   } else if ( (this.type %in% c("Dichotomous", "Factor") ) ) {
 
-    glm_One <- glm(
-      as.formula(paste(this.outcome, " ~ ", this.var, sep = "")),
-      data = this.data, family = binomial)
+    glm_One <- stats::glm(
+      stats::as.formula(paste(this.outcome, " ~ ", this.var, sep = "")),
+      data = this.data, family = stats::binomial)
 
     # If two factor levels only, overall p-value will be marginal p-value
     # of not-reference level, otherwise overall p-value will be
@@ -139,7 +139,7 @@ ORtable.text <- function(this.data, this.outcome, this.var,
     if (length(this.pvalue.coeff) == 1){
       this.pvalue <- this.pvalue.coeff
     } else{
-      this.pvalue <- anova(glm_One, test = "LRT")[2, "Pr(>Chi)"] # Overall p-value based on likelihood ratio test.
+      this.pvalue <- stats::anova(glm_One, test = "LRT")[2, "Pr(>Chi)"] # Overall p-value based on likelihood ratio test.
     }
 
 
@@ -152,12 +152,12 @@ ORtable.text <- function(this.data, this.outcome, this.var,
     # Table: First row cotains only overall p-value, and first factor level is reference-level.
     list(
       Col1 = c(" ", "Reference",
-               paste0(formatC(exp(coefficients(glm_One))[-1], digits=sign.digits.OR, format="f"))),
+               paste0(formatC(exp(stats::coefficients(glm_One))[-1], digits=sign.digits.OR, format="f"))),
       Col2 = c(" ", " ",
                paste0("(",
-                      formatC(exp(confint.default(glm_One))[-1, 1], digits=sign.digits, format="f"),
+                      formatC(exp(stats::confint.default(glm_One))[-1, 1], digits=sign.digits, format="f"),
                       "-",
-                      formatC(exp(confint.default(glm_One))[-1, 2], digits=sign.digits, format="f"),
+                      formatC(exp(stats::confint.default(glm_One))[-1, 2], digits=sign.digits, format="f"),
                       ")")
       ),
       Col3 = c(ifelse(this.pvalue < pvalue.cutoff,
@@ -223,7 +223,10 @@ ORtable.text <- function(this.data, this.outcome, this.var,
 #'    \code{linebreak.tag = "<br>"} (HTML tag to insert a single line break) is useful.
 #' @return An R character-matrix containing the compiled table information.
 #' @examples
-#' ORtable(data = example_data, info = example_variables, this.outcome = "Return_within_90_days", test.input = TRUE)
+#' \dontrun{
+#' ORtable(data = example_data, info = example_variables,
+#'   this.outcome = "Return_within_90_days", test.input = TRUE)
+#' }
 #' @export
 ORtable <- function(data, this.outcome, info, sign.digits=2, sign.digits.OR=3, pvalue.digits=3, pvalue.cutoff=0.001,
                     test.input = FALSE,

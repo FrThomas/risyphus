@@ -45,5 +45,5 @@ Output used by \code{BLtable()}
 Function to compute and render text entries for BL-table
 }
 \examples{
-Called by other function - not intended to be called by user directly.
+\dontrun{ Called by other function - not intended to be called by user directly. }
 }

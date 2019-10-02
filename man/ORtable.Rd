@@ -51,5 +51,8 @@ An R character-matrix containing the compiled table information.
 Function to compile OR-table.
 }
 \examples{
-ORtable(data = example_data, info = example_variables, this.outcome = "Return_within_90_days", test.input = TRUE)
+\dontrun{
+ORtable(data = example_data, info = example_variables,
+  this.outcome = "Return_within_90_days", test.input = TRUE)
+}
 }

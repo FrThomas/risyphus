@@ -38,5 +38,5 @@ Output used by \code{ORtable()}
 Function to compute and render text entries for OR-table
 }
 \examples{
-Called by other function - not intended to be called by user directly.
+\dontrun{ Called by other function - not intended to be called by user directly. }
 }

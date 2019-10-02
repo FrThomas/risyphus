@@ -4,7 +4,7 @@
 \name{example_data}
 \alias{example_data}
 \title{Synthetic data for compiling a table with 2 groups}
-\format{A data frame with 100 rows and 5 variables:
+\format{A data frame with 100 rows and 6 variables:
 \describe{
  \item{ID}{Fictitious ID}
  \item{Group}{group membership - GroupA or GroupB (as text)}

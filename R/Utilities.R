@@ -66,9 +66,9 @@ ListVariables <- function(data){
       mytable[mytable$Variable==var,"Values"]  <- paste(sort(unique(this.data[,var])), collapse=", ")
     } else{
       #mytable[mytable$Variable==var,"Values"]  <- "To be implemented
-      mytable[mytable$Variable==var,"Values"]  <- paste( paste(head(sort(unique(this.data[,var])), n=3), collapse=", "),
+      mytable[mytable$Variable==var,"Values"]  <- paste( paste(utils::head(sort(unique(this.data[,var])), n=3), collapse=", "),
                                                          ", (...), ",
-                                                         paste(tail(sort(unique(this.data[,var])), n=3), collapse=", "),
+                                                         paste(utils::tail(sort(unique(this.data[,var])), n=3), collapse=", "),
                                                          sep="")
 
     }

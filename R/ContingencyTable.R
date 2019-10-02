@@ -64,20 +64,20 @@ CONtable <- function(data, row.var, col.var, show.props = "cell", sign.digits.pr
 
   table.center <- table(data[, row.var], data[,col.var])
   if (show.props == "none"){ # No proportions are added.
-    table.expanded <- addmargins(table.center)
+    table.expanded <- stats::addmargins(table.center)
     table.render <- matrix(
       paste(table.expanded),
       nrow = dim(table.expanded)[1],
       dimnames = dimnames(table.expanded))
   } else if (show.props == "cell") { # Proportion with respect to total.
-    table.expanded <- addmargins(table.center)
+    table.expanded <- stats::addmargins(table.center)
     this.table.prop <- (prop.table(table.expanded)*4) * 100 # *4: true cells, plus 2 x margins, plus total
     table.render <- matrix(
       paste(as.numeric(table.expanded), " (", formatC(as.numeric(this.table.prop), digits=sign.digits.prop, format="f"), "%)", sep=""),
       nrow = dim(table.expanded)[1],
       dimnames = dimnames(table.expanded))
   } else if (show.props == "row") { # Proportions with respect to row-totals.
-    table.expanded <- addmargins(table.center)
+    table.expanded <- stats::addmargins(table.center)
     this.table.prop <- prop.table(table.center, margin = 1)
     this.table.prop <- cbind(this.table.prop,  rowSums(this.table.prop)) * 100
     # Stitch together with main part (add last row with col. totals afterwards):
@@ -89,7 +89,7 @@ CONtable <- function(data, row.var, col.var, show.props = "cell", sign.digits.pr
     table.render <- rbind(table.render, table.expanded[dim(table.expanded)[1],])
     rownames(table.render)[dim(table.render)[1]] <- "Sum"
     } else if (show.props == "col") { # Proportions with respect to col-totals.
-    table.expanded <- addmargins(table.center)
+    table.expanded <- stats::addmargins(table.center)
     this.table.prop <- prop.table(table.center, margin = 2)
     this.table.prop <- rbind(this.table.prop,  colSums(this.table.prop)) * 100
     # Stitch together with main part (add last col with row totals afterwards):

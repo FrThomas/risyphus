@@ -44,7 +44,7 @@
 #'  \item{last_row}{Last table row used for the corresponding variable}
 #' }
 #' @examples
-#' Called by other function - not intended to be called by user directly.
+#' \dontrun{ Called by other function - not intended to be called by user directly. }
 #' @export
 ONEtable.layout <- function(data, info){
   ### NOTE: Uses factor levels to determine table
@@ -82,7 +82,7 @@ ONEtable.layout <- function(data, info){
 #' @inheritParams ONEtable
 #' @return Output used by \code{ONEtable()}
 #' @examples
-#' Called by other function - not intended to be called by user directly.
+#' \dontrun{ Called by other function - not intended to be called by user directly. }
 #' @export
 ONEtable.text <- function(data, this.var, this.type,
                        sign.digits, sign.digits.prop){
@@ -91,7 +91,7 @@ ONEtable.text <- function(data, this.var, this.type,
   if (this.type == "Continuous") {
     list(
       Col1 = paste(formatC(mean(this.data.All, na.rm=TRUE), digits=sign.digits, format="f"), " (",
-                   formatC(sd(this.data.All, na.rm=TRUE), digits=sign.digits, format="f"), ")", sep = "")
+                   formatC(stats::sd(this.data.All, na.rm=TRUE), digits=sign.digits, format="f"), ")", sep = "")
     )
   } else if ( (this.type %in% c("Dichotomous", "Factor")) ) {
 

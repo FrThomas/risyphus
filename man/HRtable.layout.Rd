@@ -25,5 +25,5 @@ Data frame containing layout information of the table to be computed
 \code{HRtable.layout} is called by \code{\link{HRtable}} to gather information about the table before computing begins
 }
 \examples{
-Called by other function - not intended to be called by user directly.
+\dontrun{ Called by other function - not intended to be called by user directly. }
 }

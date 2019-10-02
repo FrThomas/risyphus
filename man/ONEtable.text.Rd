@@ -24,5 +24,5 @@ Output used by \code{ONEtable()}
 Function to compute and render text entries for ONE-table
 }
 \examples{
-Called by other function - not intended to be called by user directly.
+\dontrun{ Called by other function - not intended to be called by user directly. }
 }

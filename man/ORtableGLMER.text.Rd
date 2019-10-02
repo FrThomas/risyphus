@@ -14,6 +14,8 @@ ORtableGLMER.text(this.data, this.outcome, this.ID, this.var, this.type,
 \item{this.outcome}{The name of the variable (column) in \code{data} that is
 the binary outcome for the logistic regression models.}
 
+\item{this.ID}{ID used for grouping (random effect)}
+
 \item{this.var}{Variable in the table (must exist in \code{this.data})}
 
 \item{this.type}{Variable type for table}
@@ -33,11 +35,11 @@ passed on to html-rendering this symbol can be produced by \code{less.than.chara
 when using function htmlTable() in the htmlTable-package).}
 }
 \value{
-Output used by \code{ORtable()}
+Output used by \code{ORtableGLMER()}
 }
 \description{
 Function to compute and render text entries for OR-table
 }
 \examples{
-Called by other function - not intended to be called by user directly.
+\dontrun{ Called by other function - not intended to be called by user directly. }
 }

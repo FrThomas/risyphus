@@ -68,7 +68,6 @@ rm(mydemo, mydata)
 #'  \item{ORtable}{Indicator whether to include in BL table}
 #'  \item{Table.label}{Label to use in the created table}
 #'  \item{Type}{What type of variable this is: Continuous, Dichotomous, or Factor?}
-#'  \item{Test}{Test to be used for p-value: t-test, Wilcoxon, Chi-square, or Fisher?)}
 #' }
 #' @source Synthetic data created by the package author
 "example_variables2"
@@ -99,7 +98,7 @@ usethis::use_data(example_data2, example_variables2, overwrite = TRUE)
 #'  \item{last_row}{Last table row used for the corresponding variable}
 #' }
 #' @examples
-#' Called by other function - not intended to be called by user directly.
+#' \dontrun{ Called by other function - not intended to be called by user directly. }
 #' @export
 ORtableGLMER.layout <- function(data, info){
   ### NOTE: Uses factor levels to determine table
@@ -135,12 +134,13 @@ ORtableGLMER.layout <- function(data, info){
 #' @param this.data Data used for the computations
 #' @param this.outcome The name of the variable (column) in \code{data} that is
 #'    the binary outcome for the logistic regression models.
+#' @param this.ID ID used for grouping (random effect)
 #' @param this.var Variable in the table (must exist in \code{this.data})
 #' @param this.type Variable type for table
 #' @inheritParams ORtable
-#' @return Output used by \code{ORtable()}
+#' @return Output used by \code{ORtableGLMER()}
 #' @examples
-#' Called by other function - not intended to be called by user directly.
+#' \dontrun{ Called by other function - not intended to be called by user directly. }
 #' @export
 ORtableGLMER.text <- function(this.data, this.outcome, this.ID, this.var,
                          this.type, sign.digits, sign.digits.OR, pvalue.digits, pvalue.cutoff, less.than.character){
@@ -152,8 +152,8 @@ ORtableGLMER.text <- function(this.data, this.outcome, this.ID, this.var,
   if (this.type == "Continuous") { # Logistic/GLMER regression, one line output.
 
     glmer_One <- lme4::glmer(
-      as.formula(paste(this.outcome, " ~ ", this.var, " + (1 | ", this.ID, ")", sep = "")),
-      data = this.data, family = binomial) # ML estimation is used by glmer.
+      stats::as.formula(paste(this.outcome, " ~ ", this.var, " + (1 | ", this.ID, ")", sep = "")),
+      data = this.data, family = stats::binomial) # ML estimation is used by glmer.
 
     this.pvalue <- summary(glmer_One)$coefficients[2, "Pr(>|z|)"] # 1st slot is intercept.
 
@@ -174,8 +174,8 @@ ORtableGLMER.text <- function(this.data, this.outcome, this.ID, this.var,
   } else if ( (this.type %in% c("Dichotomous", "Factor") ) ) {
 
     glmer_One <- lme4::glmer(
-      as.formula(paste(this.outcome, " ~ ", this.var, " + (1 | ", this.ID, ")", sep = "")),
-      data = this.data, family = binomial) # ML estimation is used by glmer.
+      stats::as.formula(paste(this.outcome, " ~ ", this.var, " + (1 | ", this.ID, ")", sep = "")),
+      data = this.data, family = stats::binomial) # ML estimation is used by glmer.
 
     # If two factor levels only, overall p-value will be marginal p-value
     # of not-reference level, otherwise overall p-value will be
@@ -190,7 +190,7 @@ ORtableGLMER.text <- function(this.data, this.outcome, this.ID, this.var,
       this.pvalue <- this.pvalue.coeff
     } else{
       this.pvalue <-
-        drop1(glmer_One, test = "Chisq")[2, "Pr(Chi)"] # 1st slot is <none>.
+        stats::drop1(glmer_One, test = "Chisq")[2, "Pr(Chi)"] # 1st slot is <none>.
     }
 
     # First level is reference level.

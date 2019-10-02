@@ -1,8 +1,8 @@
 Package: risyphus
 Type: Package
-Version: 0.0.0.9300
+Version: 0.0.0.9320
 Title: Tools/utility functions to facilitate recurrent tasks with focus on
-    observational studies and clinical trials with two groups.
+    observational studies and clinical trials with two groups
 Authors@R: c(person("Fridtjof", "Thomas", email = "fthomas4@uthsc.edu", role = c("aut", "cre")))
 Description: This package contains functions that facilitate laborious steps
     in most data analysis tasks, such as basic variable description,
@@ -19,11 +19,13 @@ Description: This package contains functions that facilitate laborious steps
     reproducible computing.
 Depends: R (>= 3.4.0)
 Imports: MASS,
-    survival
+    survival,
+    lme4,
+    usethis
 Suggests: testthat,
     knitr,
     rmarkdown
-License: GNU General Public License v3.0
+License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
 URL: https://github.com/FrThomas/risyphus

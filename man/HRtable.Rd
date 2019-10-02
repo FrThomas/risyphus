@@ -53,5 +53,8 @@ An R character-matrix containing the compiled table information.
 Function to compile HR-table.
 }
 \examples{
-HRtable(data = example_data, info = example_variables, this.outcome = "Surv(Follow_up_Years, Event_Death)", test.input = TRUE)
+\dontrun{
+HRtable(data = example_data, info = example_variables,
+  this.outcome = "Surv(Follow_up_Years, Event_Death)", test.input = TRUE)
+}
 }
