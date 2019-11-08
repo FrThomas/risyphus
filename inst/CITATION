@@ -15,6 +15,6 @@ citEntry(
   paste( "Fridtjof Thomas (2019).",
   "risyphus: Tools/utility functions to facilitate recurrent tasks with focus on observational studies and clinical trials with two groups",
   "TBD, XX(x), x-xx.",
-  "URL https://github.com/FrThomas/risyphus.""
+  "URL https://github.com/FrThomas/risyphus."
   )
 )
