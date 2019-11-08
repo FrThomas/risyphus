@@ -1,0 +1,20 @@
+citHeader("To cite risyphus in publications use:")
+
+citEntry(
+  entry    = "Article",
+  title    = "risyphus: Tools/utility functions to facilitate recurrent tasks with focus on observational studies and clinical trials with two groups",
+  author   = personList(as.person("Fridtjof Thomas")),
+  journal  = "TBD",
+  year     = "2019",
+  volume   = "XX",
+  number   = "xxx",
+  pages    = "x--xx",
+  url      = "https://github.com/FrThomas/risyphus",
+
+  textVersion =
+  paste( "Fridtjof Thomas (2019).",
+  "risyphus: Tools/utility functions to facilitate recurrent tasks with focus on observational studies and clinical trials with two groups",
+  "TBD, XX(x), x-xx.",
+  "URL https://github.com/FrThomas/risyphus.""
+  )
+)
