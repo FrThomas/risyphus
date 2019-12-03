@@ -57,6 +57,21 @@ example_variables
 
 ```
 
+The specified test (variable `Test`) must be one of these:
+
+- If `Type = Dichotomous` or `Type = Factor` then `Test` must be one of
+    - `Chi-square`
+    - `Fisher`
+    - `none`
+- If `Type = Continuous` then `Test` must be one of
+    - `t-test`
+    - `Wilcoxon`
+    - `none`
+
+When `none` is specified for `Test`, no p-value will be computed and/or
+displayed.
+
+
 A variable *not* listed above is the one that defines the two groups, namely
 "Group" in our example.  This information needs to be submitted to the 
 function `BLtable` as well, and we get a compiled "baseline table" as
@@ -249,18 +264,8 @@ way as `BLtabel` shown above and follow this approach:
 displays the output. 
 
 The vignette *Introduction to risyphus* 
-[`vignette("Introduction", package = "risyphus")`] contains a table with the
+[`vignette("risyphus-Introduction", package = "risyphus")`] contains a table with the
 core functions available after installing risyphus.
-
-Forthcoming: The vignette *Combining  risyphus and R Markdown* 
-[`vignette("risyphus-RMarkdown", package = "risyphus")`] contains a detailed example
-of how to harvest the true power of risyphus (and R Markdown) to generate reports.
-
-Forthcoming: The vignette *risyphus sample code* 
-[`vignette("risyphus-code", package = "risyphus")`] contains sample code
-for each function in risyphus including a suitable subsequent call to 
-a function that produces the corresponding html-table (including hints for
-trouble shooting).
 
 
 

@@ -81,7 +81,8 @@ example_data <- data.frame(
 #'  \item{BLtable}{Indicator whether to include in BL table}
 #'  \item{Table.label}{Label to use in the created table}
 #'  \item{Type}{What type of variable this is: Continuous, Dichotomous, or Factor?}
-#'  \item{Test}{Test to be used for p-value: t-test, Wilcoxon, Chi-square, or Fisher?)}
+#'  \item{Test}{Test to be used for p-value: t-test, Wilcoxon, Chi-square, Fisher, or none.
+#'     The latter will suppressed the p-value.}
 #' }
 #' @source Synthetic data created by the package author
 "example_variables"
@@ -188,11 +189,13 @@ table.text <- function(this.data, this.var, group.var, this.GroupA, this.GroupB,
   this.data.GroupA <- this.data[this.data[ , group.var] == this.GroupA, this.var]
   this.data.GroupB <- this.data[this.data[ , group.var] == this.GroupB, this.var]
 
-  if ((this.type == "Continuous") & (this.test %in% c("t-test", "Wilcoxon"))) {
+  if ((this.type == "Continuous") & (this.test %in% c("t-test", "Wilcoxon", "none"))) {
     if (this.test == "t-test") {
       this.pvalue <- stats::t.test(this.data.GroupA, this.data.GroupB, alternative = "two.sided")$p.value
     } else if (this.test == "Wilcoxon") {
       this.pvalue <- stats::wilcox.test(this.data.GroupA, this.data.GroupB, alternative = "two.sided")$p.value
+    } else if (this.test == "none") {
+      this.pvalue <- " "
     } else {
       this.pvalue <- "?.???"
     }
@@ -207,11 +210,15 @@ table.text <- function(this.data, this.var, group.var, this.GroupA, this.GroupB,
       Col3 =
         paste(formatC(mean(this.data.GroupB, na.rm=TRUE), digits=sign.digits, format="f"), " (",
               formatC(stats::sd(this.data.GroupB, na.rm=TRUE), digits=sign.digits, format="f"), ")", sep = ""),
-      Col4 = ifelse(this.pvalue < pvalue.cutoff,
-                    paste(less.than.character, pvalue.cutoff, sep=""),
-                    formatC(this.pvalue, digits=pvalue.digits, format="f"))
+      Col4 = ifelse(is.character(this.pvalue), # Occurs due to " " (none) or "?.???" (catch all).
+                    this.pvalue,
+                    ifelse(this.pvalue < pvalue.cutoff,
+                           paste(less.than.character, pvalue.cutoff, sep=""),
+                           formatC(this.pvalue, digits=pvalue.digits, format="f")
+                           )
+      )
     )
-  } else if ( (this.type %in% c("Dichotomous", "Factor")) & (this.test %in% c("Chi-square", "Fisher")) ) {
+  } else if ( (this.type %in% c("Dichotomous", "Factor")) & (this.test %in% c("Chi-square", "Fisher", "none")) ) {
 
     this.table <- table(this.data[, this.var], this.data[,group.var])
     this.table.margin <- stats::addmargins(this.table, margin = 2, FUN = sum, quiet = TRUE)
@@ -226,7 +233,9 @@ table.text <- function(this.data, this.var, group.var, this.GroupA, this.GroupB,
                           stats::chisq.test(this.table)$p.value,
                           ifelse(this.test == "Fisher",
                                  stats::fisher.test(this.table, simulate.p.value = TRUE, B = 500000)$p.value,
-                                 "?.???"
+                                 ifelse(this.test == "none",
+                                        " ",
+                                        "?.???")
                                  )
     )
 
@@ -234,9 +243,13 @@ table.text <- function(this.data, this.var, group.var, this.GroupA, this.GroupB,
       Col1 = table.combined[,"sum"],
       Col2 = table.combined[,this.GroupA],
       Col3 = table.combined[,this.GroupB],
-      Col4 = ifelse(this.pvalue < pvalue.cutoff,
-                    paste(less.than.character, pvalue.cutoff, sep=""),
-                    formatC(this.pvalue, digits=pvalue.digits, format="f"))
+      Col4 = ifelse(is.character(this.pvalue), # Occurs due to " " (none) or "?.???" (catch all).
+                    this.pvalue,
+                    ifelse(this.pvalue < pvalue.cutoff,
+                           paste(less.than.character, pvalue.cutoff, sep=""),
+                           formatC(this.pvalue, digits=pvalue.digits, format="f")
+                           )
+      )
     )
   } else { # Serves to catch errors:
     list(

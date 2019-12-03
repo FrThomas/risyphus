@@ -46,7 +46,7 @@ vignettes are actually build (see above).
 See which vignettes are available (after install):
 ```r
 vignette(package = "risyphus") # Gives list of available vignettes.
-vignette("Introduction", package = "risyphus") # Shows the vignette "Introduction to risyphus".
+vignette("risyphus-Introduction", package = "risyphus") # Shows the vignette "Introduction to risyphus".
 
 ```
 
@@ -62,7 +62,7 @@ bring up the help page for the function BLtable (make sure you have
 executed `library("risyphus")` earlier so R has loaded the associated information).
 
 The vignette *Introduction to risyphus* 
-[`vignette("Introduction", package = "risyphus")`] contains a table with the
+[`vignette("risyphus-Introduction", package = "risyphus")`] contains a table with the
 core functions available after installing risyphus.
 
 
@@ -75,6 +75,7 @@ Current Goals
 
 Recent Additions and Changes
 -----
+* BLtable now accepts `none` as statistical test to suppress p-values.
 * All functions now accept tibbles in addition to data frames.
 * Vignette "Introduction to risyphus" added - requires that you install risyphus
 in a way that vignettes are actually build (see above).
